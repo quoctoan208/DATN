@@ -170,7 +170,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
             txt_sl = itemView.findViewById(R.id.txt_sl);
             txt_tt = itemView.findViewById(R.id.txt_tt);
             txt_thoigian = itemView.findViewById(R.id.txt_thoigian);
-            button = itemView.findViewById(R.id.button);
+            button = itemView.findViewById(R.id.btn_huydonhang);
         }
     }
 }

@@ -28,11 +28,13 @@
         <activity
             android:name=".GUI.TimKiem_Activity"
             android:exported="false" />
-<!--        <activity android:name=".GUI.ThemSanPham"-->
-<!--            android:exported="false"/>-->
+        <activity android:name=".GUI.ThemSanPham"
+            android:exported="false"/>
+        <activity android:name=".GUI.NhanTinActivity"
+            android:exported="false"/>
 
         <activity
-            android:name=".GUI.ThemSanPham"
+            android:name=".Fragment.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

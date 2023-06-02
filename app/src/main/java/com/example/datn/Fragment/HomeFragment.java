@@ -38,14 +38,12 @@ public class HomeFragment  extends Fragment {
     RecyclerView tlSanPhamRecycler, spItemRecycler;
     SanPhamAdapter sanPhamAdapter;
     TheLoaiSPAdapter theLoaiSPAdapter;
-    Button button,btn_addsp;
     TextView txt_tatca, txt_tk;
     public static String MASP;
 
     public static List<TheLoai> listTL = new ArrayList<>();
     TheLoai a =  new TheLoai();
 
-    private BottomSheetDialog bottomSheetDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,29 +71,6 @@ public class HomeFragment  extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), TimKiem_Activity.class));
-            }
-        });
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomSheetDialog.setContentView(R.layout.bottom_chon);
-                TextView txt_giohang = bottomSheetDialog.findViewById(R.id.txt_giohang);
-                TextView txt_donhang = bottomSheetDialog.findViewById(R.id.txt_donhang);
-                txt_giohang.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), GioHangActivity.class));
-                        bottomSheetDialog.dismiss();
-                    }
-                });
-                txt_donhang.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        startActivity(new Intent(getActivity(), DonHangActivity.class));
-                        bottomSheetDialog.dismiss();
-                    }
-                });
-                bottomSheetDialog.show();
             }
         });
     }
@@ -153,10 +128,7 @@ public class HomeFragment  extends Fragment {
     private void anhxa(View view) {
         tlSanPhamRecycler = view.findViewById(R.id.tl_recycler);
         spItemRecycler = view.findViewById(R.id.sanpham_recycler);
-        button = view.findViewById(R.id.button);
         txt_tatca = view.findViewById(R.id.txt_tatca);
         txt_tk = view.findViewById(R.id.txt_tk);
-//        bottomSheetDialog = new BottomSheetDialog(getActivity());
-        btn_addsp = view.findViewById(R.id.button);
     }
 }

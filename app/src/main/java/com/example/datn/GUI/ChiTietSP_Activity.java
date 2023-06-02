@@ -5,6 +5,7 @@ import static com.example.datn.Fragment.HomeFragment.MASP;
 import static com.example.datn.GUI.DangNhap_Activity.MALOP;
 import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -31,12 +32,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChiTietSP_Activity extends AppCompatActivity {
-    private ImageView img_chitiet_anhsp, imageView;
+    private ImageView img_nhantin, imageView;
     private Button btn_chitiet_themgiohang;
     private TextView chitiet_malop,chitiet_soluong, chitiet_tensp, chitiet_mota, chitiet_dongia;
     private float tongtien;
     private List<SlideModel> imageList;
     private ImageSlider imageSlider;
+    public static String maSV_SP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,12 @@ public class ChiTietSP_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                    addGioHang();
+            }
+        });
+        img_nhantin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ChiTietSP_Activity.this, NhanTinActivity.class));
             }
         });
     }
@@ -109,10 +117,14 @@ public class ChiTietSP_Activity extends AppCompatActivity {
 
                 getdataAnhSP();
                 chitiet_tensp.setText(response.body().getTenSP());
+                if (response.body().getMaSV() == MASINHVIEN){
+                    chitiet_tensp.setTextColor(R.drawable.edit_txt);
+                }
                 chitiet_mota.setText(response.body().getMatoSP());
                 chitiet_dongia.setText(formatter.format(response.body().getDonGia()) + " VND");
                 chitiet_soluong.setText("Số Lượng: "+response.body().getSoLuong());
                 chitiet_malop.setText("Mã Lớp:"+MALOP);
+                maSV_SP = response.body().getMaSV()+"";
                 tongtien = response.body().getDonGia();
 
             }
@@ -155,5 +167,6 @@ public class ChiTietSP_Activity extends AppCompatActivity {
         imageSlider = findViewById(R.id.image_slider);
         chitiet_malop = findViewById(R.id.chitiet_malop);
         chitiet_soluong = findViewById(R.id.chitiet_soluong);
+        img_nhantin = findViewById(R.id.imagenhantin);
     }
 }

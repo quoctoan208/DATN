@@ -21,6 +21,20 @@
         android:padding="10dp"
         />
 
+    <ImageView
+        android:id="@+id/imagenhantin"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/edit_txt"
+        android:backgroundTint="@color/Button"
+        android:padding="10dp"
+        android:src="@drawable/baseline_message_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="504dp"
