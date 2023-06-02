@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.GioHangActivity">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/img_back"
+                    android:layout_width="40dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edit_txt"
+                    android:backgroundTint="#8BC34A"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_left"
+                    android:padding="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_weight="1"
+                    android:text="Giỏ hàng"
+                    android:fontFamily="@font/baloo2_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="30dp" />
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/txt_error"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/baloo2_semibold"
+                android:text="Giỏ hàng của bạn hiện không có sản phẩm nào !"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="40dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tổng tiền :"
+                        android:fontFamily="@font/baloo2_semibold"
+                        android:textColor="@color/black"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:id="@+id/txt_tongtien"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:fontFamily="@font/baloo2_semibold"
+                        android:textColor="#FF5722"
+                        android:textSize="25dp" />
+                </LinearLayout>
+
+                <android.widget.Button
+                    android:id="@+id/btn_mua_hang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/edit_txt"
+                    android:backgroundTint="#8BC34A"
+                    android:text="Mua hàng"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="50dp"
+                    android:textColor="@color/white"
+                    android:textSize="16dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

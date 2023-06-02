@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_giohang"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:background="@drawable/edit_txt"
+            android:backgroundTint="#8BC34A"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo2_semibold"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_cart"
+            android:text="Giỏ hàng" />
+
+        <TextView
+            android:id="@+id/txt_donhang"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            android:background="@drawable/edit_txt"
+            android:backgroundTint="#8BC34A"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:fontFamily="@font/baloo2_semibold"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:drawableEnd="@drawable/ic_notes"
+            android:text="Đơn hàng" />
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="6dp">
+    <TextView
+        android:id="@+id/tentheloai"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="12dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="12dp"
+        android:background="@drawable/edit_txt"
+        android:backgroundTint="@color/Button"
+        android:text="Thể loại"
+        android:textColor="#FFFFFF"
+        android:fontFamily="@font/baloo2_semibold"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+</LinearLayout>

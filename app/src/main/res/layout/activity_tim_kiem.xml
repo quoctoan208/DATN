@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.TimKiem_Activity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/img_back"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/edit_txt"
+                android:backgroundTint="#8BC34A"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_left"
+                android:padding="10dp"
+                />
+            <EditText
+                android:id="@+id/edit_tk"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:drawableStart="@drawable/ic_search"
+                android:layout_margin="20dp"
+                android:gravity="center_vertical"
+                android:drawablePadding="20dp"
+                android:background="@drawable/edit_txt"
+                android:backgroundTint="#8BC34A"
+                android:fontFamily="@font/baloo2_semibold"
+                android:hint="Tìm kiếm"
+                android:textSize="20dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"/>
+
+
+        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/RecyclerView_SP"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/txt_error"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloo2_semibold"
+            android:text="Sản phẩm bạn đang tìm ko có hãy thử nhập đúng tên "
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>
