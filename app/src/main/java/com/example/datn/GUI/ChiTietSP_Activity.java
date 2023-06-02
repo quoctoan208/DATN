@@ -3,7 +3,7 @@ package com.example.datn.GUI;
 import static com.example.datn.BUS.SuKien.formatter;
 import static com.example.datn.Fragment.HomeFragment.MASP;
 import static com.example.datn.GUI.DangNhap_Activity.MALOP;
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,16 +74,17 @@ public class ChiTietSP_Activity extends AppCompatActivity {
     private void addGioHang() {
         long a = (long)tongtien;
         int b = (int)a; // ép kiểu in
-        GioHang gioHang=new GioHang(0, MASINHVIEN,MASP,1,b);
+        GioHang gioHang=new GioHang(0, maSV,MASP,1,b);
 
         APIService.apiService.PostGIOHANG(gioHang).enqueue(new Callback<List<GioHang>>() {
             @Override
             public void onResponse(Call<List<GioHang>> call, Response<List<GioHang>> response) {
                 if (response.isSuccessful()){
-                    GioHang gioHang1=new GioHang(response.body().get(0).getIDGIOHANG(), MASINHVIEN, MASP,
+                    GioHang gioHang1=new GioHang(response.body().get(0).getIDGIOHANG(), maSV, MASP,
                             response.body().get(0).getSoLuong()+1,
                             response.body().get(0).getTongTien()+b);
-                    APIService.apiService.PutGIOHANG(response.body().get(0).getIDGIOHANG(),gioHang1).enqueue(new Callback<GioHang>() {
+                    APIService.apiService.PutGIOHANG(response.body().get(0).getIDGIOHANG(),gioHang1)
+                            .enqueue(new Callback<GioHang>() {
                         @Override
                         public void onResponse(Call<GioHang> call, Response<GioHang> response) {
                             if (response.isSuccessful()){
@@ -117,7 +118,7 @@ public class ChiTietSP_Activity extends AppCompatActivity {
 
                 getdataAnhSP();
                 chitiet_tensp.setText(response.body().getTenSP());
-                if (response.body().getMaSV() == MASINHVIEN){
+                if (response.body().getMaSV() == maSV){
                     chitiet_tensp.setTextColor(R.drawable.edit_txt);
                 }
                 chitiet_mota.setText(response.body().getMatoSP());

@@ -1,7 +1,7 @@
 package com.example.datn.GUI;
 
 import static com.example.datn.GUI.ChiTietSP_Activity.maSV_SP;
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +48,7 @@ public class NhanTinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nhantin);
 
         // Khởi tạo Firebase Auth và Firebase Database
-        String mAuth = MASINHVIEN+"";
+        String mAuth = maSV +"";
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         // Lấy thông tin người dùng hiện tại

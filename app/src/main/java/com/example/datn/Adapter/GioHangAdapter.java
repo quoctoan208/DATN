@@ -63,7 +63,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                 if (sosp[0] != 1) {
                     sosp[0] = sosp[0] - 1;
                     holder.txt_sl.setText(sosp[0] + "");
-                    GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0], sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
+                    GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(),
+                            GioHang.getMaSP(), sosp[0], sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
                     Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
                 }
                 if (sosp1[0] <= 0) {
@@ -105,7 +106,8 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                 sosp[0] = sosp[0] + 1;
                 sosp1[0] = sosp[0];
                 holder.txt_sl.setText(sosp[0] + "");
-                GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0], sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
+                GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0],
+                        sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
                 Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
             }
         });

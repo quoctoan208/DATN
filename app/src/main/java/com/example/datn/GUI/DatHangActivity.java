@@ -2,7 +2,7 @@ package com.example.datn.GUI;
 
 import static com.example.datn.BUS.SuKien.LOATDING;
 import static com.example.datn.BUS.SuKien.formatter;
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
 import static com.example.datn.GUI.GioHangActivity.getdata;
 
 import android.app.Dialog;
@@ -71,13 +71,13 @@ public class DatHangActivity extends AppCompatActivity {
     }
 
     public void addonhang(){
-        APIService.apiService.Getgiohang(MASINHVIEN).enqueue(new Callback<List<GioHang>>() {
+        APIService.apiService.Getgiohang(maSV).enqueue(new Callback<List<GioHang>>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onResponse(Call<List<GioHang>> call, Response<List<GioHang>> response) {
                 if (response.isSuccessful()) {
                     for (GioHang gioHang:response.body()){
-                        DonHang donHang=new DonHang(0,gioHang.getSoLuong(),gioHang.getTongTien(),0, MASINHVIEN,gioHang.getMaSP(),txt_diachi.getText().toString().trim(),
+                        DonHang donHang=new DonHang(0,gioHang.getSoLuong(),gioHang.getTongTien(),0, maSV,gioHang.getMaSP(),txt_diachi.getText().toString().trim(),
                                 txt_sdt.getText().toString(),txt_ghichu.getText().toString(),java.time.LocalDateTime.now() + "");
                         APIService.apiService.PostDONHANG(donHang).enqueue(new Callback<DonHang>() {
                             @Override
@@ -116,7 +116,7 @@ public class DatHangActivity extends AppCompatActivity {
         });
     }
     private void getdata_dathang() {
-        APIService.apiService.GetNGUOIDUNGDONHANG(MASINHVIEN).enqueue(new Callback<List<NguoiDung>>() {
+        APIService.apiService.GetNGUOIDUNGDONHANG(maSV).enqueue(new Callback<List<NguoiDung>>() {
             @Override
             public void onResponse(Call<List<NguoiDung>> call, Response<List<NguoiDung>> response) {
                 if (response.isSuccessful()){
@@ -132,7 +132,7 @@ public class DatHangActivity extends AppCompatActivity {
 
             }
         });
-        APIService.apiService.Getgiohang(MASINHVIEN).enqueue(new Callback<List<GioHang>>() {
+        APIService.apiService.Getgiohang(maSV).enqueue(new Callback<List<GioHang>>() {
             @Override
             public void onResponse(Call<List<GioHang>> call, Response<List<GioHang>> response) {
                 if (response.isSuccessful()) {

@@ -1,6 +1,6 @@
 package com.example.datn.GUI;
 
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -49,7 +49,7 @@ public class DaGFragment extends Fragment {
         getdata();
     }
     private void getdata() {
-        APIService.apiService.Getalldonhang(MASINHVIEN,2).enqueue(new Callback<List<DonHang>>() {
+        APIService.apiService.Getalldonhang(maSV,2).enqueue(new Callback<List<DonHang>>() {
             @Override
             public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                 if (response.isSuccessful()) {

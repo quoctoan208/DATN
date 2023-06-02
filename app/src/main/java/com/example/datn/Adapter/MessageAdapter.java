@@ -1,19 +1,12 @@
 package com.example.datn.Adapter;
 
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
-
 import android.content.Context;
-import android.graphics.Color;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datn.Model.Message;

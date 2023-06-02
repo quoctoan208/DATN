@@ -1,6 +1,6 @@
 package com.example.datn.GUI;
 
-import static com.example.datn.GUI.DangNhap_Activity.MASINHVIEN;
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -12,14 +12,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.datn.Api.APIService;
-import com.example.datn.Database.DbAnhSP;
 import com.example.datn.Fragment.MainActivity;
 import com.example.datn.Model.AnhSP;
 import com.example.datn.Model.SanPham;
@@ -183,7 +181,7 @@ public class ThemSanPham extends Activity {
         int mSoLuong = Integer.parseInt(edt_soluong.getText().toString());
         float mDonGia = Float.parseFloat(edt_dongia.getText().toString());
         String mMota = edt_motasp.getText().toString();
-        int mMaSV = MASINHVIEN;
+        int mMaSV = maSV;
         int mXetDuyet = 1;
         String mMaTL = "L01";
         sanPham = new SanPham(mMaSP, mMaTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);

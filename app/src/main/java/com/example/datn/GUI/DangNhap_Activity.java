@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class DangNhap_Activity extends AppCompatActivity {
     private EditText txt_masvdangnhap,txt_password;
     private Button btn_login;
-    public static int MASINHVIEN = 10119736,MALOP = 101195;
+    public static int maSV =10119736,MALOP = 101195;
     private Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class DangNhap_Activity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()){
-                            MASINHVIEN =masv;
+                            maSV =masv;
                             getUser();
                             Toast.makeText(DangNhap_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(DangNhap_Activity.this, MainActivity.class));
@@ -78,7 +78,7 @@ public class DangNhap_Activity extends AppCompatActivity {
     }
 
     private void getUser(){
-        APIService.apiService.GetNGUOIDUNG(MASINHVIEN).enqueue(new Callback<NguoiDung>() {
+        APIService.apiService.GetNGUOIDUNG(maSV).enqueue(new Callback<NguoiDung>() {
             @Override
             public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
                 if(response.body() != null){
