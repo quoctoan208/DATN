@@ -35,7 +35,9 @@ import retrofit2.Response;
 
 public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang_viewhodler> {
     List<GioHang> list;
+    static List<SanPham> phamList;
     Activity context;
+    int GiaTien =0;
 
     public GioHangAdapter(List<GioHang> list, Activity context) {
         this.list = list;
@@ -64,7 +66,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                     sosp[0] = sosp[0] - 1;
                     holder.txt_sl.setText(sosp[0] + "");
                     GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(),
-                            GioHang.getMaSP(), sosp[0], sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
+                            GioHang.getMaSP(), sosp[0], sosp[0] * GiaTien);
                     Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
                 }
                 if (sosp1[0] <= 0) {
@@ -81,20 +83,18 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                                         @Override
                                         public void onResponse(Call<GioHang> call, Response<GioHang> response) {
                                             if (response.isSuccessful()) {
-                                                Toast.makeText(context, "Xóa giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(context, "Xóa sản phẩm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                                                 getdata();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<GioHang> call, Throwable t) {
-
+                                            Toast.makeText(context, "LỖI xóa sản phẩm không thành công", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }
                             });
-
-
                     builder.create();
                     builder.show();
                 }
@@ -103,12 +103,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
         holder.img_cong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sosp[0] = sosp[0] + 1;
-                sosp1[0] = sosp[0];
-                holder.txt_sl.setText(sosp[0] + "");
-                GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0],
-                        sosp[0] * Integer.parseInt(holder.txt_tt.getText().toString()));
-                Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
+                if (sosp[0] <= phamList.get(position).getSoLuong()){
+                    sosp[0] = sosp[0] + 1;
+                    sosp1[0] = sosp[0];
+                    holder.txt_sl.setText(sosp[0] + "");
+                    GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0],
+                            sosp[0] * GiaTien);
+                    Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
+                }
+                else Toast.makeText(context, "Chỉ có "+sosp[0]+" sản phẩm được đăng bán", Toast.LENGTH_SHORT).show();
             }
         });
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +137,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
 
                                     @Override
                                     public void onFailure(Call<GioHang> call, Throwable t) {
-
+                                        Toast.makeText(context, "Xóa không thành công", Toast.LENGTH_SHORT).show();
                                     }
                                 });
                             }
@@ -154,15 +157,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                     SanPham sanPham = response.body();
                     Glide.with(context).load(sanPham.getAnhSP()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(15))).error(R.drawable.anhspdemo).into(holder.img);
                     holder.txt_name.setText(sanPham.getTenSP());
-                    holder.txt_mota.setText(sanPham.getMatoSP());
+                    holder.txt_masv.setText("Người bán: "+sanPham.getMaSV());
                     holder.txt_gia.setText(formatter.format(sanPham.getDonGia()) + " VNĐ");
-                    holder.txt_tt.setText("" + sanPham.getDonGia());
+                    GiaTien = (int)sanPham.getDonGia();
                 }
             }
 
             @Override
             public void onFailure(Call<SanPham> call, Throwable t) {
-
+                Toast.makeText(context, "Không thể load sản phẩm giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -177,7 +180,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
 
             @Override
             public void onFailure(Call<GioHang> call, Throwable t) {
-
+                Toast.makeText(context, "Không thành công", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -193,19 +196,19 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
 
     public class gio_hang_viewhodler extends RecyclerView.ViewHolder {
         ImageView img, img_tru, img_cong, img_delete;
-        TextView txt_name, txt_mota, txt_gia, txt_sl, txt_tt;
+        TextView txt_name, txt_masv, txt_gia, txt_sl;
+
 
         public gio_hang_viewhodler(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.img);
+            img = itemView.findViewById(R.id.imganhSP_giohang);
             img_tru = itemView.findViewById(R.id.img_tru);
             img_cong = itemView.findViewById(R.id.img_cong);
             img_delete = itemView.findViewById(R.id.img_delete);
-            txt_name = itemView.findViewById(R.id.txt_name);
-            txt_mota = itemView.findViewById(R.id.txt_mota);
-            txt_gia = itemView.findViewById(R.id.txt_gia);
-            txt_sl = itemView.findViewById(R.id.txt_sl);
-            txt_tt = itemView.findViewById(R.id.txt_tt);
+            txt_masv = itemView.findViewById(R.id.txt_masv_giohang);
+            txt_name = itemView.findViewById(R.id.txt_tensp_giohang);
+            txt_gia = itemView.findViewById(R.id.txt_dongiaSP_giohang);
+            txt_sl = itemView.findViewById(R.id.txt_soluongsp_giohang);
         }
     }
 }

@@ -5,30 +5,29 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.datn.GUI.CXNFragment;
-import com.example.datn.GUI.DHFragment;
-import com.example.datn.GUI.DaGFragment;
-import com.example.datn.GUI.DangGFragment;
+import com.example.datn.Fragment.CXNFragment;
+import com.example.datn.Fragment.DHFragment;
+import com.example.datn.Fragment.DaGFragment;
+import com.example.datn.Fragment.DangGFragment;
 
 public class Donhang_viewPage extends FragmentStateAdapter {
     public Donhang_viewPage(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
 
-    @NonNull
-    @Override
+    private static final Class<?>[] FRAGMENT_CLASSES = {
+            CXNFragment.class,
+            DangGFragment.class,
+            DaGFragment.class,
+            DHFragment.class
+    };
+
     public Fragment createFragment(int position) {
-        switch (position) {
-            case 0:
-                return new CXNFragment();
-            case 1:
-                return new DangGFragment();
-            case 2:
-                return new DaGFragment();
-            case 3:
-                return new DHFragment();
-            default:
-                return null;
+        try {
+            return (Fragment) FRAGMENT_CLASSES[position].newInstance();
+        } catch (IllegalAccessException | InstantiationException | IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -12,19 +12,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:padding="10dp"
             android:gravity="center"
             android:orientation="horizontal">
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
-                android:layout_gravity="center"
                 android:src="@drawable/ic_left"
-                android:padding="10dp"
                 />
             <EditText
                 android:id="@+id/edit_tk"
@@ -35,7 +30,7 @@
                 android:gravity="center_vertical"
                 android:drawablePadding="20dp"
                 android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
+                android:backgroundTint="@color/text"
                 android:fontFamily="@font/baloo2_semibold"
                 android:hint="Tìm kiếm"
                 android:textSize="20dp"

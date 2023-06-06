@@ -19,17 +19,17 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/layout_food"
+            android:id="@+id/layout_donhang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/img"
+                android:id="@+id/img_donhang"
                 android:layout_width="120dp"
                 android:layout_height="150dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/anhspdemo" />
+                android:src="@drawable/backgroud_demo" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -45,14 +45,14 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/txt_name"
+                        android:id="@+id/txt_madonhang_donhang"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ellipsize="end"
                         android:fontFamily="@font/baloo2_semibold"
                         android:maxLines="1"
-                        android:text="Tên sản phẩm"
+                        android:text="mã Đon Hàng"
                         android:textColor="@color/black"
                         android:textSize="20dp" />
 
@@ -60,11 +60,11 @@
 
 
                 <TextView
-                    android:id="@+id/txt_mota"
+                    android:id="@+id/txt_diachinhan_donhang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/baloo2_semibold"
-                    android:text="Mô tả"
+                    android:text="Địa chỉ nhận"
                     android:textColor="@color/black"
                     android:textSize="15dp" />
 
@@ -75,29 +75,29 @@
 
 
                     <TextView
-                        android:id="@+id/txt_gia"
+                        android:id="@+id/txt_phuongthucthanhtoan_donhang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/baloo2_semibold"
-                        android:text="200.000 Đ"
+                        android:text="Nhận hàng thanh toán"
                         android:textColor="@color/black"
                         android:textSize="20dp" />
 
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/txt_sl"
+                    android:id="@+id/txt_soluongsp_donhang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
                     android:fontFamily="@font/baloo2_semibold"
                     android:maxLines="1"
-                    android:text="Số lượng:"
+                    android:text="người bán: 101196"
                     android:textColor="@color/black"
                     android:textSize="16dp" />
 
                 <TextView
-                    android:id="@+id/txt_tt"
+                    android:id="@+id/txt_tongtien_donhang"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -115,7 +115,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txt_thoigian"
+                android:id="@+id/txt_thoigian_donhang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_clock"

@@ -1,6 +1,7 @@
 package com.example.datn.Api;
 
 import com.example.datn.Model.AnhSP;
+import com.example.datn.Model.ChiTietDonHang;
 import com.example.datn.Model.DonHang;
 import com.example.datn.Model.GioHang;
 import com.example.datn.Model.NguoiDung;
@@ -29,12 +30,13 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 
 public interface APIService {
 
     Gson gson = new GsonBuilder().setLenient().setDateFormat("dd/MM/yyyy").create();
-    APIService apiService = new Retrofit.Builder().baseUrl("https://newbrasshen62.conveyor.cloud")
+    APIService apiService = new Retrofit.Builder().baseUrl("https://widepurpleapple33.conveyor.cloud")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -89,17 +91,16 @@ public interface APIService {
     @GET("/api/tbl_SANPHAM")
     Call<List<SanPham>> getSanPham();
 
-    @GET("/api/tbl_SANPHAM_XETDUYET")
-    Call<List<SanPham>> getSanPhamxetduyet();
-
+    @GET("api/tbl_SANPHAM/Gettbl_SANPHAM_XETDUYET")
+    Call<List<SanPham>> getSanPhamxetduyet(@Query("maSV") int maSV, @Query("xetDuyet") int xetDuyet);
     @GET("/api/tbl_SANPHAM/{id}")
     Call<SanPham> GetSANPHAM(@Path("id") String id);
 
-    @GET("/api/tbl_SANPHAM/SPTL/{mtl}")
-    Call<List<SanPham>> SPTL(@Path("mtl") String mtl);
+    @GET("/api/tbl_SANPHAM/SPTL/{maTL}")
+    Call<List<SanPham>> SPTL(@Path("maTL") String maTL);
 
-    @GET("/api/tbl_SANPHAM/TimKiemSP/{Tensp}")
-    Call<List<SanPham>> TimKiemSP(@Path("Tensp") String Tensp);
+    @GET("/api/tbl_SANPHAM/TimKiemSP/{tenSP}")
+    Call<List<SanPham>> TimKiemSP(@Path("tenSP") String tenSP);
 
     @GET("/api/tbl_ANHSP/{id}")
     Call<AnhSP> GetAnhSP(@Path("id") String id);
@@ -129,10 +130,16 @@ public interface APIService {
 
 //    @POST("api/CHITIETDONHANGs")
 //    Call<ChiTietDonHang>PostCHITIETDONHANG(@Body ChiTietDonHang ChiTietDonHang);
-    @POST("/api/DONHANGs")
+    @POST("/api/DONHANG")
     Call<DonHang>PostDONHANG(@Body DonHang donHang);
-    @PUT("/api/DONHANGs/{id}")
-    Call<List<DonHang>> PutDONHANG(@Path("id") int id, @Body DonHang donHang);
-    @GET("/api/DONHANGs/{usename}/{check}")
-    Call<List<DonHang>>Getalldonhang(@Path("usename")int usename,@Path("check")int check);
+    @PUT("/api/DONHANG/{maDH}")
+    Call<List<DonHang>> PutDONHANG(@Path("maDH") String maDH, @Body DonHang donHang);
+    @GET("/api/DONHANG/Gettbl_DONHANGMUA/{maSVMua}/{trangThaiDH}")
+    Call<List<DonHang>> Getalldonhangmua(@Path("maSVMua")int maSVMua, @Path("trangThaiDH")int trangThaiDH);
+    @GET("/api/DONHANG/Gettbl_DONHANG/{maSVBan}/{trangThaiDH}")
+    Call<List<DonHang>>GetalldonhangBan(@Path("maSVBan")int maSVBan,@Path("trangThaiDH")int trangThaiDH);
+
+    @POST("/api/CHITIETDONHANG")
+    Call<ChiTietDonHang>PostCHITIETDONHANG(@Body ChiTietDonHang chiTietDonHang);
+
 }

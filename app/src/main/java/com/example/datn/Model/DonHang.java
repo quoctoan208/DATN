@@ -1,101 +1,92 @@
 package com.example.datn.Model;
 
+import java.util.Date;
+
 public class DonHang {
-    int maDH,soLuong,tongTien,trangthai,useName;
-    String maSP,diachi,sdt,tinnhan,thoigian;
 
-    public int getUseName() {
-        return useName;
+    private String diaChiGiaoHang;
+    private String phuongThucThanhToan;
+    private float tongTienThanhToan;
+    private int trangThaiDH;
+    private int maSVMua;
+    private int maSVBan;
+    private String maDH;
+    private Date ngayGiaoDich;
+
+    public DonHang(){}
+
+    public String getDiaChiGiaoHang() {
+        return diaChiGiaoHang;
     }
 
-    public void setUseName(int useName) {
-        this.useName = useName;
+    public void setDiaChiGiaoHang(String diaChiGiaoHang) {
+        this.diaChiGiaoHang = diaChiGiaoHang;
     }
 
-    public DonHang(int maDH, int soLuong, int tongTien, int trangthai, int useName, String maSP, String diachi, String sdt, String tinnhan, String thoigian) {
-        this.maDH = maDH;
-        this.soLuong = soLuong;
-        this.tongTien = tongTien;
-        this.trangthai = trangthai;
-        this.useName = useName;
-        this.maSP = maSP;
-        this.diachi = diachi;
-        this.sdt = sdt;
-        this.tinnhan = tinnhan;
-        this.thoigian = thoigian;
+    public String getPhuongThucThanhToan() {
+        return phuongThucThanhToan;
     }
 
-    public int getMaDH() {
+    public void setPhuongThucThanhToan(String phuongThucThanhToan) {
+        this.phuongThucThanhToan = phuongThucThanhToan;
+    }
+
+    public float getTongTienThanhToan() {
+        return tongTienThanhToan;
+    }
+
+    public void setTongTienThanhToan(float tongTienThanhToan) {
+        this.tongTienThanhToan = tongTienThanhToan;
+    }
+
+    public int getTrangThaiDH() {
+        return trangThaiDH;
+    }
+
+    public void setTrangThaiDH(int trangThaiDH) {
+        this.trangThaiDH = trangThaiDH;
+    }
+
+    public int getMaSVMua() {
+        return maSVMua;
+    }
+
+    public void setMaSVMua(int maSVMua) {
+        this.maSVMua = maSVMua;
+    }
+
+    public int getMaSVBan() {
+        return maSVBan;
+    }
+
+    public void setMaSVBan(int maSVBan) {
+        this.maSVBan = maSVBan;
+    }
+
+    public String getMaDH() {
         return maDH;
     }
 
-    public void setMaDH(int maDH) {
+    public void setMaDH(String maDH) {
         this.maDH = maDH;
     }
 
-    public int getSoLuong() {
-        return soLuong;
+    public Date getNgayGiaoDich() {
+        return ngayGiaoDich;
     }
 
-    public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+    public void setNgayGiaoDich(Date ngayGiaoDich) {
+        this.ngayGiaoDich = ngayGiaoDich;
     }
 
-    public int getTongTien() {
-        return tongTien;
-    }
-
-    public void setTongTien(int tongTien) {
-        this.tongTien = tongTien;
-    }
-
-    public int getTrangthai() {
-        return trangthai;
-    }
-
-    public void setTrangthai(int trangthai) {
-        this.trangthai = trangthai;
-    }
-
-
-
-    public String getMaSP() {
-        return maSP;
-    }
-
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
-    }
-
-    public String getDiachi() {
-        return diachi;
-    }
-
-    public void setDiachi(String diachi) {
-        this.diachi = diachi;
-    }
-
-    public String getSdt() {
-        return sdt;
-    }
-
-    public void setSdt(String sdt) {
-        this.sdt = sdt;
-    }
-
-    public String getTinnhan() {
-        return tinnhan;
-    }
-
-    public void setTinnhan(String tinnhan) {
-        this.tinnhan = tinnhan;
-    }
-
-    public String getThoigian() {
-        return thoigian;
-    }
-
-    public void setThoigian(String thoigian) {
-        this.thoigian = thoigian;
+    public DonHang(String diaChiGiaoHang, String phuongThucThanhToan, float tongTienThanhToan, int trangThaiDH, int maSVMua, int maSVBan, String maDH, Date ngayGiaoDich) {
+        this.diaChiGiaoHang = diaChiGiaoHang;
+        this.phuongThucThanhToan = phuongThucThanhToan;
+        this.tongTienThanhToan = tongTienThanhToan;
+        this.trangThaiDH = trangThaiDH;
+        this.maSVMua = maSVMua;
+        this.maSVBan = maSVBan;
+        this.maDH = maDH;
+        this.ngayGiaoDich = ngayGiaoDich;
     }
 }

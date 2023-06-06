@@ -9,20 +9,20 @@
     android:layout_marginBottom="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp"
-    app:cardBackgroundColor="#FDFFEA"
+    android:backgroundTint="@color/white"
     android:layout_margin="3dp">
     <LinearLayout
         android:id="@+id/layout_food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bogoc_itemview"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/txt_tt"
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
         <ImageView
-            android:id="@+id/img"
+            android:id="@+id/imganhSP_giohang"
             android:layout_width="110dp"
             android:layout_height="140dp"
             android:layout_marginStart="5dp"
@@ -45,7 +45,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/txt_name"
+                    android:id="@+id/txt_tensp_giohang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -65,12 +65,12 @@
 
 
             <TextView
-                android:id="@+id/txt_mota"
+                android:id="@+id/txt_masv_giohang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mô tả"
+                android:text="ma SV"
                 android:fontFamily="@font/baloo2_semibold"
-                android:textColor="@color/black"
+                android:textColor="@color/teal_700"
                 android:textSize="15dp" />
 
             <LinearLayout
@@ -86,7 +86,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/txt_gia"
+                        android:id="@+id/txt_dongiaSP_giohang"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="200.000 Đ"
@@ -107,14 +107,14 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/edit_txt"
-                            android:backgroundTint="#8BC34A"
+                            android:backgroundTint="@color/Button"
                             android:paddingStart="12dp"
                             android:paddingEnd="12dp"
                             android:src="@drawable/ic_minus"
                             android:textSize="30dp" />
 
                         <TextView
-                            android:id="@+id/txt_sl"
+                            android:id="@+id/txt_soluongsp_giohang"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="20dp"
@@ -129,7 +129,7 @@
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:background="@drawable/edit_txt"
-                            android:backgroundTint="#8BC34A"
+                            android:backgroundTint="@color/Button"
                             android:paddingStart="10dp"
                             android:paddingEnd="10dp"
                             android:src="@drawable/ic_plus"

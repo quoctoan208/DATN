@@ -40,7 +40,7 @@ import retrofit2.Response;
 public class ThemSanPham extends Activity {
     private static final String TAG = "MyActivity";
     private EditText edt_masp, edt_tensp, edt_soluong, edt_dongia, edt_motasp;
-    private Button btn_addSanPham, themanh, danganh;
+    private Button btn_addSanPham, themanh;
     List<ImageView> imageViews = new ArrayList<>();
     List<Uri> imgUri = new ArrayList<>();
     public static List<AnhSP> anhSPList;
@@ -58,7 +58,7 @@ public class ThemSanPham extends Activity {
     }
 
     //Add ảnh lên firebase
-    private void addAnhSP( final int imageCount, final Uri imageUri) {
+    private void addAnhSPFireBase( final int imageCount, final Uri imageUri) {
         // Tạo tên của ảnh dựa trên số thứ tự của ảnh
         final String imageName = "anh" + (imageCount + 1);
 
@@ -98,8 +98,7 @@ public class ThemSanPham extends Activity {
 
                         // Nếu đã upload hết ảnh, cập nhật đối tượng AnhSP lên Realtime Database
                         if (imageCount == 4) {
-                            DatabaseReference anhSPRef = FirebaseDatabase.getInstance().getReference().child("anhSP").child(anhSP.getMaSP());
-                            anhSPRef.setValue(anhSP);
+                            addAnhSPAPI(anhSP);
                             Toast.makeText(ThemSanPham.this, "Thêm thành công ảnh sản phẩm", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -157,8 +156,7 @@ public class ThemSanPham extends Activity {
         btn_addSanPham.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addsanpham();
-                addAnhSP();
+                addsanphamAPI();
                 anhSPList.add(anhSP);
             }
         });
@@ -175,7 +173,7 @@ public class ThemSanPham extends Activity {
         });
     }
 
-    public void addsanpham() {
+    public void addsanphamAPI() {
         String mMaSP = edt_masp.getText().toString();
         String mTenSP = edt_tensp.getText().toString();
         int mSoLuong = Integer.parseInt(edt_soluong.getText().toString());
@@ -190,7 +188,7 @@ public class ThemSanPham extends Activity {
         anhSP.setMaSP(mMaSP);
         for (int i = 0; i < imgUri.size(); i++) {
             Uri imageUri = imgUri.get(i);
-            addAnhSP( i, imageUri);
+            addAnhSPFireBase( i, imageUri);
         }
 
         //thêm dữ liệu vào dbSanpham
@@ -200,19 +198,21 @@ public class ThemSanPham extends Activity {
                 if (response.body() != null) {
                     if (response.body() > 0) {
                         Toast.makeText(ThemSanPham.this, "Thêm ok rồi đấy", Toast.LENGTH_SHORT);
+                        startActivity(new Intent(ThemSanPham.this,MainActivity.class));
+                        finish();
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
-
+                Toast.makeText(ThemSanPham.this, "Không thêm được sản phẩm", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void addAnhSP() {
-        APIService.apiService.PostANHSANPHAM(anhSP).enqueue(new Callback<List<AnhSP>>() {//Thêm ảnh sản phẩm
+    private void addAnhSPAPI(AnhSP anhSP1) {
+        APIService.apiService.PostANHSANPHAM(anhSP1).enqueue(new Callback<List<AnhSP>>() {//Thêm ảnh sản phẩm
             @Override
             public void onResponse(Call<List<AnhSP>> call, Response<List<AnhSP>> response) {
                 if (response.isSuccessful()) {
@@ -235,7 +235,6 @@ public class ThemSanPham extends Activity {
         edt_motasp = findViewById(R.id.edt_add_motasp);
         btn_addSanPham = findViewById(R.id.btn_addsanpham);
         themanh = findViewById(R.id.btn_themanhsp);
-        danganh = findViewById(R.id.btn_danganhsp);
         anhSP = new AnhSP();
         imageViews = new ArrayList<>();
         imageViews.add(findViewById(R.id.add_imgAnhSP1));

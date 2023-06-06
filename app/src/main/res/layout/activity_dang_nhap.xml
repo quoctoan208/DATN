@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
+    android:background="#E4E3E3"
     tools:context=".GUI.DangNhap_Activity">
     <TextView
         android:id="@+id/txt_nametitle"
@@ -42,7 +43,7 @@
                 android:gravity="center"
                 android:text="Login Now"
                 android:fontFamily="@font/baloo2_semibold"
-                android:textColor="#8599cc"
+                android:textColor="@color/text"
                 android:textSize="45dp"
                 android:textStyle="bold" />
 
@@ -55,14 +56,14 @@
                 android:hint="Mã Sinh Viên"
                 android:imeOptions="actionNext"
 
-                android:background="@drawable/edit_txt"
+                android:background="@drawable/bogoc_itemview"
                 android:paddingStart="20dp"
-                android:backgroundTint="#8BC34A"
+                android:backgroundTint="@color/text"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/baloo2_semibold"
                 android:maxLength="100"
-                android:textColor="#FFFFFF"
-                android:textColorHint="#FFFFFF" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/text" />
 
 
             <EditText
@@ -72,16 +73,16 @@
                 android:layout_marginTop="10dp"
                 android:drawableStart="@drawable/ic_lockpassword_24"
                 android:hint="  Mật khẩu"
-                android:background="@drawable/edit_txt"
+                android:background="@drawable/bogoc_itemview"
                 android:paddingStart="20dp"
-                android:backgroundTint="#8BC34A"
+                android:backgroundTint="@color/text"
                 android:drawablePadding="10dp"
                 android:fontFamily="@font/baloo2_semibold"
                 android:imeOptions="actionNext"
                 android:inputType="textPassword"
                 android:maxLength="100"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/text" />
 
             <android.widget.Button
                 android:id="@+id/btn_login"
@@ -93,7 +94,8 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/baloo2_semibold"
                 android:textAllCaps="false"
-                android:backgroundTint="#4CAF50"
+                android:elevation="20dp"
+                android:backgroundTint="@color/Button"
                 android:textSize="25dp" />
 
 

@@ -9,6 +9,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:fillViewport="true">
 
         <LinearLayout
@@ -19,7 +20,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:background="@color/text"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -28,9 +29,8 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/edit_txt"
-                    android:backgroundTint="#8BC34A"
-                    android:padding="10dp"
+                    android:background="@drawable/bogoc_itemview"
+                    android:backgroundTint="@color/white"
                     android:src="@drawable/ic_left" />
 
                 <TextView
@@ -40,90 +40,89 @@
                     android:layout_weight="1"
                     android:fontFamily="@font/baloo2_semibold"
                     android:text="Thanh toán"
-                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:textColor="@color/white"
                     android:textSize="30dp" />
 
             </LinearLayout>
 
             <EditText
-                android:id="@+id/txt_hoten"
+                android:id="@+id/txt_hoten_tt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
+                android:background="@drawable/bogoc_itemview"
                 android:drawableStart="@drawable/ic_baseline_contact_phone_24"
-                android:drawablePadding="10dp"
+                android:drawablePadding="20dp"
                 android:fontFamily="@font/baloo2_semibold"
-                android:hint="Họ tên"
+                android:hint="HỌ VÀ TÊN"
                 android:imeOptions="actionNext"
                 android:maxLength="100"
                 android:enabled="false"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/Edt_text" />
 
             <EditText
-                android:id="@+id/txt_sdt"
+                android:id="@+id/txt_sdt_tt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
+                android:background="@drawable/bogoc_itemview"
+                android:backgroundTint="@color/Button"
                 android:drawableStart="@drawable/ic_baseline_contact_phone_24"
-                android:drawablePadding="10dp"
+                android:drawablePadding="20dp"
                 android:fontFamily="@font/baloo2_semibold"
-                android:hint="Số điện thoại"
+                android:hint="SỐ ĐIỆN THOẠI"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/Edt_text" />
 
             <EditText
-                android:id="@+id/txt_diachi"
+                android:id="@+id/txt_diachi_tt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
+                android:background="@drawable/bogoc_itemview"
                 android:drawableStart="@drawable/ic_baseline_maps_home_work_24"
-                android:drawablePadding="10dp"
+                android:drawablePadding="20dp"
                 android:fontFamily="@font/baloo2_semibold"
-                android:hint="Địa chỉ"
+                android:hint="ĐỊA CHỈ NHẬN HÀNG"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/Edt_text" />
 
             <EditText
-                android:id="@+id/txt_ghichu"
+                android:id="@+id/txt_ghichu_tt"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#8BC34A"
+                android:background="@drawable/bogoc_itemview"
+                android:backgroundTint="@color/Button"
                 android:drawableStart="@drawable/ic_notes"
-                android:drawablePadding="10dp"
+                android:drawablePadding="16dp"
                 android:fontFamily="@font/baloo2_semibold"
-                android:hint="Ghi chú"
+                android:hint="GHI CHÚ"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/white"
-                android:textColorHint="@color/white" />
+                android:textColor="@color/text"
+                android:textColorHint="@color/Edt_text" />
 
 
             <LinearLayout
@@ -133,7 +132,7 @@
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_item"
+                    android:id="@+id/list_item_thanhtoan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp" />
@@ -150,7 +149,7 @@
                         android:layout_weight="1"
                         android:fontFamily="@font/baloo2_semibold"
                         android:text="Tổng thanh toán :"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text"
                         android:textSize="20dp" />
 
                     <TextView
@@ -170,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="40dp"
                     android:background="@drawable/edit_txt"
-                    android:backgroundTint="#4CAF50"
+                    android:backgroundTint="@color/Button"
                     android:text="Thanh toán"
                     android:textAllCaps="false"
                     android:textColor="@color/white"

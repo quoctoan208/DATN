@@ -37,7 +37,7 @@ public class GioHangActivity extends AppCompatActivity {
     public static TextView txt_error;
     public static Button btn_mua_hang;
     public static LinearLayout layout;
-    static GioHangAdapter gio_hangs;
+    static GioHangAdapter gio_hangs ;
     static List<GioHang> gioHangList = new ArrayList<>();
 
     @Override
@@ -78,9 +78,9 @@ public class GioHangActivity extends AppCompatActivity {
                         tongtien = tongtien + gioHang.getTongTien();
                         GioHang gioHang1 = new GioHang(gioHang.getIDGIOHANG(),gioHang.getMaSV()
                                 ,gioHang.getMaSP(),gioHang.getSoLuong(),gioHang.getTongTien());
+                        txt_tongtien.setText(formatter.format(tongtien) + " VND");
                         gioHangList.add(gioHang1);
                         gio_hangs.notifyDataSetChanged();
-                        txt_tongtien.setText(formatter.format(tongtien) + " VND");
                     }
 
 

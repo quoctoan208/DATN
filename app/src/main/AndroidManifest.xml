@@ -9,10 +9,12 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        tools:replace="android:theme"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DATN"
         tools:targetApi="31" >
+
         <activity
             android:name=".GUI.DatHangActivity"
             android:exported="false" />
@@ -20,18 +22,21 @@
             android:name=".GUI.DonHangActivity"
             android:exported="false" />
         <activity
-            android:name=".GUI.GioHangActivity"
-            android:exported="false" />
-        <activity
             android:name=".GUI.ChiTietSP_Activity"
             android:exported="false" />
         <activity
             android:name=".GUI.TimKiem_Activity"
             android:exported="false" />
+
         <activity android:name=".GUI.ThemSanPham"
             android:exported="false"/>
+
         <activity android:name=".GUI.NhanTinActivity"
             android:exported="false"/>
+
+        <activity android:name=".Momo.ThanhToanMomoActivity"
+            android:exported="false"/>
+
 
         <activity
             android:name=".Fragment.MainActivity"
@@ -43,5 +48,5 @@
             </intent-filter>
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

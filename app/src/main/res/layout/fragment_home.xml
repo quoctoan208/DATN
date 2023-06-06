@@ -14,16 +14,18 @@
         android:drawableStart="@drawable/ic_search"
         android:gravity="center_vertical"
         android:background="@color/Button"
-        android:backgroundTint="@color/backgroud"
+        android:backgroundTint="@color/text"
         android:fontFamily="@font/baloo2_semibold"
         android:text="Tìm kiếm"
         android:textSize="20dp"
+        android:drawablePadding="10dp"
         android:textColor="@color/white"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="20dp"
+        android:layout_marginTop="50dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
@@ -35,7 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="10dp"
                 android:textColor="@color/black"
                 android:textSize="30dp"
                 android:text="Thể loại"

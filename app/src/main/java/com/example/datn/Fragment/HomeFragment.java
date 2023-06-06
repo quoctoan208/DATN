@@ -1,7 +1,10 @@
 package com.example.datn.Fragment;
 
+import static com.example.datn.GUI.DangNhap_Activity.maSV;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.datn.Adapter.SanPhamAdapter;
 import com.example.datn.Adapter.TheLoaiSPAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.GUI.ChiTietSP_Activity;
 import com.example.datn.GUI.DonHangActivity;
 import com.example.datn.GUI.GioHangActivity;
 import com.example.datn.GUI.TimKiem_Activity;
@@ -41,8 +45,8 @@ public class HomeFragment  extends Fragment {
     TextView txt_tatca, txt_tk;
     public static String MASP;
 
-    public static List<TheLoai> listTL = new ArrayList<>();
-    TheLoai a =  new TheLoai();
+    List<TheLoai> listTL;
+    List<SanPham> sanPhamList;
 
 
     @Override
@@ -55,6 +59,7 @@ public class HomeFragment  extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         anhxa(view);
+        setUpView();
         loadData();
         onclick();
     }
@@ -73,27 +78,58 @@ public class HomeFragment  extends Fragment {
                 startActivity(new Intent(getActivity(), TimKiem_Activity.class));
             }
         });
+
+        theLoaiSPAdapter.setOnClickListener(new TheLoaiSPAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int pos, View view) {
+                TheLoai theLoai = listTL.get(pos);
+                sanPhamList.clear();
+                APIService.apiService.SPTL(theLoai.getMaTL()).enqueue(new Callback<List<SanPham>>() {
+                    @Override
+                    public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
+                        if (response.body() != null){
+                            sanPhamList.addAll(response.body());
+                            sanPhamAdapter.setData(sanPhamList);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<SanPham>> call, Throwable t) {
+                    }
+                });
+
+            }
+        });
+
+        sanPhamAdapter.setOnClickListener(new SanPhamAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int pos, View view) {
+                SanPham sanPham = sanPhamList.get(pos);
+                MASP = sanPham.getMaSP();
+                startActivity(new Intent(getActivity(), ChiTietSP_Activity.class));
+            }
+        });
     }
 
     private void loadData() {
 
         //Lấy dữ liệu sản phẩm
-        APIService.apiService.getSanPham().enqueue(new Callback<List<SanPham>>() {
+        APIService.apiService.getSanPhamxetduyet(maSV,1).enqueue(new Callback<List<SanPham>>() {
             @Override
             public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
                 if (response.body() != null) {
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
-                    spItemRecycler.setLayoutManager(layoutManager);
-                    sanPhamAdapter = new SanPhamAdapter(getActivity(), response.body());
-                    spItemRecycler.setAdapter(sanPhamAdapter);
+                   for(SanPham sanPham:response.body()){
+                       sanPhamList.add(sanPham);
+                       sanPhamAdapter.setData(sanPhamList);
+                   }
                 } else {
-                    Toast.makeText(getActivity(), "không co dl", Toast.LENGTH_LONG).show();
+                    Log.e("loadData", "Response error: " + response.code() + " - " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<SanPham>> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.e("loadData", "Error: " + t.getMessage());
             }
         });
 
@@ -102,27 +138,28 @@ public class HomeFragment  extends Fragment {
             @Override
             public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
                 if (response.body() != null) {
-                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(), RecyclerView.HORIZONTAL, false);
-                    tlSanPhamRecycler.setLayoutManager(layoutManager);
-                    theLoaiSPAdapter = new TheLoaiSPAdapter(getActivity(), response.body(), spItemRecycler);
-                    tlSanPhamRecycler.setAdapter(theLoaiSPAdapter);
-                    for (TheLoai theLoai : response.body()){
-                        TheLoai a =  new TheLoai(theLoai.getMaTL(),theLoai.getTenTL());
-                        listTL.add(a);
-                    }
-
-
-
-                } else {
-                    Toast.makeText(getActivity(), "Deo co dl", Toast.LENGTH_LONG).show();
+                    listTL.addAll(response.body());
+                    theLoaiSPAdapter.setData(listTL);
                 }
             }
 
             @Override
             public void onFailure(Call<List<TheLoai>> call, Throwable t) {
-                Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+    private void setUpView() {
+        listTL = new ArrayList<>();
+        theLoaiSPAdapter = new TheLoaiSPAdapter(getActivity(),listTL);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        tlSanPhamRecycler.setLayoutManager(linearLayoutManager);
+        tlSanPhamRecycler.setAdapter(theLoaiSPAdapter);
+
+        sanPhamList = new ArrayList<>();
+        sanPhamAdapter = new SanPhamAdapter(getActivity(),sanPhamList);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        spItemRecycler.setLayoutManager(linearLayoutManager2);
+        spItemRecycler.setAdapter(sanPhamAdapter);
     }
 
     private void anhxa(View view) {

@@ -7,9 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="backgroud">#24D5C4</color>
-    <color name="Button">#16B6A7</color>
-    <color name="text">#16B6A7</color>
+    <color name="backgroud">#87CEFA</color>
+    <color name="Button">#1E90FF</color>
+    <color name="text">#1E96F6</color>
+
+    <color name="Edt_text">#881E96F6</color>
+<!--    <color name="Button">#0872C6</color>-->
+<!--    <color name="text">#1E96F6</color>-->
     <color name="lavender">#8692f7</color>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.datn.GUI;
+package com.example.datn.Fragment;
 
 //import static com.example.doan4.GUI.DangNhap_Activity.USENAME;
 
@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datn.Adapter.DonHangAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.GUI.DonHangActivity;
 import com.example.datn.Model.DonHang;
 import com.example.datn.R;
 
@@ -51,7 +53,7 @@ public class CXNFragment extends Fragment {
     }
 
     public static void getdata_CXN() {
-        APIService.apiService.Getalldonhang(maSV, 0).enqueue(new Callback<List<DonHang>>() {
+        APIService.apiService.Getalldonhangmua(maSV, 0).enqueue(new Callback<List<DonHang>>() {
             @Override
             public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                 if (response.isSuccessful()) {
@@ -68,7 +70,7 @@ public class CXNFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<DonHang>> call, Throwable t) {
-
+                Toast.makeText(donHangActivity.getApplication(), "Không tìm thấy đơn CXN", Toast.LENGTH_SHORT).show();
             }
         });
     }

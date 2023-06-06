@@ -1,7 +1,6 @@
-package com.example.datn.GUI;
+package com.example.datn.Fragment;
 
-//import static com.example.doan4.GUI.DangNhap_Activity.USENAME;
-
+import static com.example.datn.Fragment.CXNFragment.donHangActivity;
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.os.Bundle;
@@ -9,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,18 +28,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class DangGFragment extends Fragment {
+public class DaGFragment extends Fragment {
     RecyclerView recyclerView;
     LinearLayout linearLayout;
-    public DangGFragment() {
+    public DaGFragment() {
         // Required empty public constructor
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dang_g, container, false);
+        return inflater.inflate(R.layout.fragment_da_g, container, false);
     }
 
     @Override
@@ -49,7 +51,7 @@ public class DangGFragment extends Fragment {
         getdata();
     }
     private void getdata() {
-        APIService.apiService.Getalldonhang(maSV,1).enqueue(new Callback<List<DonHang>>() {
+        APIService.apiService.Getalldonhangmua(maSV,2).enqueue(new Callback<List<DonHang>>() {
             @Override
             public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                 if (response.isSuccessful()) {
@@ -66,7 +68,7 @@ public class DangGFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<DonHang>> call, Throwable t) {
-
+                Toast.makeText(donHangActivity.getApplication(), "Không tìm thấy đơn CXN", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -13,26 +13,25 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp">
+            android:padding="10dp"
+            android:background="@color/text"
+            >
 
             <ImageView
                 android:id="@+id/img_back"
                 android:layout_width="40dp"
                 android:layout_height="35dp"
-                android:layout_gravity="center"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="#4CAF50"
-                android:padding="10dp"
+                android:background="@drawable/bogoc_itemview"
+                android:backgroundTint="@color/white"
                 android:src="@drawable/ic_left" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:fontFamily="@font/baloo2_semibold"
                 android:text="Đơn hàng"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
+                android:gravity="center"
                 android:textSize="30dp" />
         </LinearLayout>
 

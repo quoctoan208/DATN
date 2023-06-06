@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +22,6 @@ import com.example.datn.R;
 import com.example.datn.Api.APIService;
 import com.example.datn.Model.GioHang;
 import com.example.datn.Model.SanPham;
-import com.example.datn.R;
 
 import java.util.List;
 
@@ -60,14 +60,14 @@ public class DatHangAdapter extends RecyclerView.Adapter<DatHangAdapter.DatHangv
                     SanPham sanPham = response.body();
                     Glide.with(context).load(sanPham.getAnhSP()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(15))).error(R.drawable.anhspdemo).into(holder.img);
                     holder.txt_name.setText(sanPham.getTenSP());
-                    holder.txt_mota.setText(sanPham.getMatoSP());
+                    holder.txt_nguoiban.setText( "MaSV: "+sanPham.getMaSV());
                     holder.txt_gia.setText(formatter.format(sanPham.getDonGia()) + " VNĐ");
                 }
             }
 
             @Override
             public void onFailure(Call<SanPham> call, Throwable t) {
-
+                Toast.makeText(context, "Không lấy được thông tin giỏn hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -82,15 +82,15 @@ public class DatHangAdapter extends RecyclerView.Adapter<DatHangAdapter.DatHangv
 
     public class DatHangviewhodler extends RecyclerView.ViewHolder {
         ImageView img  ;
-        TextView txt_name, txt_mota, txt_gia, txt_sl;
+        TextView txt_name, txt_nguoiban, txt_gia, txt_sl;
 
         public DatHangviewhodler(@NonNull View itemView) {
             super(itemView);
-            img = itemView.findViewById(R.id.img);
-            txt_name = itemView.findViewById(R.id.txt_name);
-            txt_mota = itemView.findViewById(R.id.txt_mota);
-            txt_gia = itemView.findViewById(R.id.txt_gia);
-            txt_sl = itemView.findViewById(R.id.txt_sl);
+            img = itemView.findViewById(R.id.img_anhsp_dathang);
+            txt_name = itemView.findViewById(R.id.txt_tensp_dathang);
+            txt_nguoiban = itemView.findViewById(R.id.txt_masvban_dathang);
+            txt_gia = itemView.findViewById(R.id.txt_dongiaSP_dathang);
+            txt_sl = itemView.findViewById(R.id.txt_soluongsp_dathang);
         }
     }
 }
