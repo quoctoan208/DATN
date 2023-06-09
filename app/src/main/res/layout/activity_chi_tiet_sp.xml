@@ -10,19 +10,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/backgroud_layout"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/text"
             android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="50dp"
                 android:layout_height="35dp"
+                android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/Button"
                 android:src="@drawable/ic_left" />
 
@@ -31,8 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="20dp"
-                android:fontFamily="@font/baloo2_semibold"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                 android:padding="5dp"
                 android:text="CHI TIẾT SẢN PHẨM"
                 android:textColor="@color/white"
@@ -43,58 +44,28 @@
                 android:layout_width="45dp"
                 android:layout_height="35dp"
                 android:layout_marginStart="28dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/edit_txt"
                 android:backgroundTint="@color/text"
                 android:src="@drawable/baseline_message_24" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/chitiet_malop"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="@color/white"
-                android:fontFamily="@font/baloo2_semibold"
-                android:gravity="center"
-                android:text="Mã Lớp: 101195"
-                android:textColor="#1C8076"
-                android:textSize="19dp" />
-
-            <TextView
-                android:id="@+id/chitiet_soluong"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="@color/white"
-                android:fontFamily="@font/baloo2_semibold"
-                android:gravity="center"
-                android:text="Số lượng: 1"
-                android:textColor="#1C8076"
-                android:textSize="19dp" />
-        </LinearLayout>
 
         <com.denzcoskun.imageslider.ImageSlider
             android:id="@+id/image_slider"
-            android:layout_width="350dp"
-            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
+            android:scaleType="centerCrop"
             app:iss_auto_cycle="true"
             app:iss_delay="1000"
             app:iss_period="1000"
             app:iss_text_align="CENTER">
 
         </com.denzcoskun.imageslider.ImageSlider>
+
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -106,7 +77,7 @@
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:layout_weight="1"
             android:fillViewport="true">
 
@@ -123,13 +94,43 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/baloo2_semibold"
+                    android:layout_marginEnd="15dp"
+                    android:fontFamily="@font/playfair_pt_black"
                     android:padding="5dp"
                     android:text="Máy bơm thời sinh viên"
                     android:textColor="@android:color/background_dark"
                     android:textSize="25sp"
                     tools:layout_editor_absoluteX="0dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/chitiet_masinhvien"
+                        android:layout_width="220dp"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/white"
+                        android:layout_marginStart="15dp"
+                        android:fontFamily="@font/baloo2_semibold"
+                        android:text="Mã sinh viên"
+                        android:textColor="@color/RED"
+                        android:textSize="19dp" />
+
+                    <TextView
+                        android:id="@+id/chitiet_soluong"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="30dp"
+                        android:backgroundTint="@color/white"
+                        android:fontFamily="@font/baloo2_semibold"
+                        android:gravity="center"
+                        android:text="Số lượng: 1"
+                        android:textColor="@color/RED"
+                        android:textSize="19dp" />
+                </LinearLayout>
 
 
                 <TextView
@@ -174,8 +175,7 @@ Sợi vải coolmax. Làm mát và thoáng khí x2 lần
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/detail_page_cart_button_bg"
-                android:drawableStart="@drawable/ic_cart"
-                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/runner_icon"
                 android:paddingStart="20dp"
                 android:text="Thêm giỏ hàng"
                 android:textAllCaps="false"

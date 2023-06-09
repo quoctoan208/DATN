@@ -31,9 +31,9 @@
                 android:drawablePadding="20dp"
                 android:background="@drawable/edit_txt"
                 android:backgroundTint="@color/text"
-                android:fontFamily="@font/baloo2_semibold"
+                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                 android:hint="Tìm kiếm"
-                android:textSize="20dp"
+                android:textSize="23dp"
                 android:textColor="@color/white"
                 android:textColorHint="@color/white"/>
 

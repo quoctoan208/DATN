@@ -6,9 +6,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.datn.Fragment.CXNFragment;
+import com.example.datn.Fragment.ChogiaohangFragment;
 import com.example.datn.Fragment.DHFragment;
 import com.example.datn.Fragment.DaGFragment;
 import com.example.datn.Fragment.DangGFragment;
+import com.example.datn.Fragment.DonbanCXNFragment;
 
 public class Donhang_viewPage extends FragmentStateAdapter {
     public Donhang_viewPage(@NonNull FragmentActivity fragmentActivity) {
@@ -17,6 +19,7 @@ public class Donhang_viewPage extends FragmentStateAdapter {
 
     private static final Class<?>[] FRAGMENT_CLASSES = {
             CXNFragment.class,
+            ChogiaohangFragment.class,
             DangGFragment.class,
             DaGFragment.class,
             DHFragment.class
@@ -33,6 +36,6 @@ public class Donhang_viewPage extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 }

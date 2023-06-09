@@ -1,14 +1,13 @@
 package com.example.datn.Fragment;
 
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
-
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,17 +17,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
 import com.example.datn.Adapter.SanPhamAdapter;
 import com.example.datn.Adapter.TheLoaiSPAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.GUI.ChiTietSP_Activity;
-import com.example.datn.GUI.DonHangActivity;
-import com.example.datn.GUI.GioHangActivity;
 import com.example.datn.GUI.TimKiem_Activity;
 import com.example.datn.Model.SanPham;
 import com.example.datn.Model.TheLoai;
 import com.example.datn.R;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,15 +35,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment  extends Fragment {
+public class HomeFragment extends Fragment {
 
     RecyclerView tlSanPhamRecycler, spItemRecycler;
     SanPhamAdapter sanPhamAdapter;
     TheLoaiSPAdapter theLoaiSPAdapter;
     TextView txt_tatca, txt_tk;
     public static String MASP;
-
-    List<TheLoai> listTL;
+    Dialog dialog;
+    public static List<TheLoai> listTL;
+    private ImageSlider imageSlider;
     List<SanPham> sanPhamList;
 
 
@@ -59,9 +58,13 @@ public class HomeFragment  extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         anhxa(view);
+        setImageSlide();
         setUpView();
         loadData();
         onclick();
+    }
+
+    private void setImageSlide() {
     }
 
     private void onclick() {
@@ -82,31 +85,44 @@ public class HomeFragment  extends Fragment {
         theLoaiSPAdapter.setOnClickListener(new TheLoaiSPAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int pos, View view) {
+                SuKien.showDialog(getContext());
                 TheLoai theLoai = listTL.get(pos);
                 sanPhamList.clear();
                 APIService.apiService.SPTL(theLoai.getMaTL()).enqueue(new Callback<List<SanPham>>() {
                     @Override
                     public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
-                        if (response.body() != null){
-                            sanPhamList.addAll(response.body());
-                            sanPhamAdapter.setData(sanPhamList);
+                        if (response.body() != null) {
+                            for(SanPham sanPham : response.body()){
+                                //lọc sản phẩm thể loại
+                                if(sanPham.getXetDuyet() == 2 && sanPham.getMaSV() != maSV){
+                                    sanPhamList.add(sanPham);
+                                    sanPhamAdapter.setData(sanPhamList);
+                                    Toast.makeText(getContext(), "Đang load sản phẩm thể loại", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+//                            sanPhamList.addAll(response.body());
+//                            sanPhamAdapter.setData(sanPhamList);
+//                            Toast.makeText(getContext(), "Đang load sản phẩm thể loại", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<SanPham>> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Không load được dữ liệu", Toast.LENGTH_SHORT).show();
                     }
                 });
-
+                SuKien.dismissDialog();
             }
         });
 
         sanPhamAdapter.setOnClickListener(new SanPhamAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int pos, View view) {
+                SuKien.showDialog(getContext());
                 SanPham sanPham = sanPhamList.get(pos);
                 MASP = sanPham.getMaSP();
                 startActivity(new Intent(getActivity(), ChiTietSP_Activity.class));
+                SuKien.dismissDialog();
             }
         });
     }
@@ -114,14 +130,12 @@ public class HomeFragment  extends Fragment {
     private void loadData() {
 
         //Lấy dữ liệu sản phẩm
-        APIService.apiService.getSanPhamxetduyet(maSV,1).enqueue(new Callback<List<SanPham>>() {
+        APIService.apiService.getSanPhamxetduyet(maSV, 2).enqueue(new Callback<List<SanPham>>() {
             @Override
             public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
                 if (response.body() != null) {
-                   for(SanPham sanPham:response.body()){
-                       sanPhamList.add(sanPham);
-                       sanPhamAdapter.setData(sanPhamList);
-                   }
+                    sanPhamList.addAll(response.body());
+                    sanPhamAdapter.setData(sanPhamList);
                 } else {
                     Log.e("loadData", "Response error: " + response.code() + " - " + response.message());
                 }
@@ -129,7 +143,7 @@ public class HomeFragment  extends Fragment {
 
             @Override
             public void onFailure(Call<List<SanPham>> call, Throwable t) {
-                Log.e("loadData", "Error: " + t.getMessage());
+                Log.e("loadSANPHAM", "Error: " + t.getMessage());
             }
         });
 
@@ -145,27 +159,32 @@ public class HomeFragment  extends Fragment {
 
             @Override
             public void onFailure(Call<List<TheLoai>> call, Throwable t) {
+                Log.e("THELOAI", "Error: " + t.getMessage());
             }
         });
+        SuKien.dismissDialog();
     }
+
     private void setUpView() {
         listTL = new ArrayList<>();
-        theLoaiSPAdapter = new TheLoaiSPAdapter(getActivity(),listTL);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        theLoaiSPAdapter = new TheLoaiSPAdapter(getActivity(), listTL);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         tlSanPhamRecycler.setLayoutManager(linearLayoutManager);
         tlSanPhamRecycler.setAdapter(theLoaiSPAdapter);
 
         sanPhamList = new ArrayList<>();
-        sanPhamAdapter = new SanPhamAdapter(getActivity(),sanPhamList);
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        sanPhamAdapter = new SanPhamAdapter(getActivity(), sanPhamList);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         spItemRecycler.setLayoutManager(linearLayoutManager2);
         spItemRecycler.setAdapter(sanPhamAdapter);
     }
 
     private void anhxa(View view) {
+        SuKien.showDialog(getContext());
         tlSanPhamRecycler = view.findViewById(R.id.tl_recycler);
         spItemRecycler = view.findViewById(R.id.sanpham_recycler);
         txt_tatca = view.findViewById(R.id.txt_tatca);
         txt_tk = view.findViewById(R.id.txt_tk);
+        imageSlider = view.findViewById(R.id.image_slider);
     }
 }

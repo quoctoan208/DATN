@@ -22,13 +22,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:fontFamily="@font/playfair_pt_black"
             android:layout_marginTop="5dp"
             android:padding="8dp"
             android:text="Chức Năng"
-
             android:textAlignment="viewStart"
-            android:textColor="@color/text"
-            android:textSize="25dp"
+            android:textColor="#2196F3"
+            android:textSize="30dp"
             android:textStyle="bold" />
 
         <ImageView
@@ -48,9 +48,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/bogoc_itemview"
-        android:backgroundTint="@color/text"
+        android:backgroundTint="@color/white"
         android:orientation="horizontal"
-        android:elevation="50dp"
+        android:elevation="5dp"
         android:layout_marginBottom="20dp"
         android:padding="10dp">
 
@@ -66,9 +66,10 @@
             android:layout_marginLeft="30dp"
             android:text="Thêm sản phẩm mới"
             android:layout_gravity="center"
+            android:fontFamily="@font/playfair_pt_black"
             android:textColor="@color/text"
             android:textStyle="bold"
-            android:textSize="20sp" />
+            android:textSize="22sp" />
 
     </LinearLayout>
 

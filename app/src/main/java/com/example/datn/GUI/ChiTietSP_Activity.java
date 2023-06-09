@@ -5,6 +5,7 @@ import static com.example.datn.Fragment.HomeFragment.MASP;
 import static com.example.datn.GUI.DangNhap_Activity.MALOP;
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.Model.AnhSP;
 import com.example.datn.Model.GioHang;
 import com.example.datn.Model.SanPham;
@@ -34,7 +36,7 @@ import retrofit2.Response;
 public class ChiTietSP_Activity extends AppCompatActivity {
     private ImageView img_nhantin, imageView;
     private Button btn_chitiet_themgiohang;
-    private TextView chitiet_malop,chitiet_soluong, chitiet_tensp, chitiet_mota, chitiet_dongia;
+    private TextView chitiet_malop, chitiet_soluong, chitiet_tensp, chitiet_mota, chitiet_dongia;
     private float tongtien;
     private List<SlideModel> imageList;
     private ImageSlider imageSlider;
@@ -59,7 +61,7 @@ public class ChiTietSP_Activity extends AppCompatActivity {
         btn_chitiet_themgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                   addGioHang();
+                addGioHang();
             }
         });
         img_nhantin.setOnClickListener(new View.OnClickListener() {
@@ -68,44 +70,60 @@ public class ChiTietSP_Activity extends AppCompatActivity {
                 startActivity(new Intent(ChiTietSP_Activity.this, NhanTinActivity.class));
             }
         });
+
+        chitiet_malop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ChiTietSP_Activity.this, ProfNguoiBanActivity.class));
+            }
+        });
     }
 
 
     private void addGioHang() {
-        long a = (long)tongtien;
-        int b = (int)a; // ép kiểu in
-        GioHang gioHang=new GioHang(0, maSV,MASP,1,b);
+        SuKien.showDialog(ChiTietSP_Activity.this);
+        long a = (long) tongtien;
+        int b = (int) a; // ép kiểu in
+        GioHang gioHang = new GioHang(0, maSV, MASP, 1, b);
 
         APIService.apiService.PostGIOHANG(gioHang).enqueue(new Callback<List<GioHang>>() {
             @Override
             public void onResponse(Call<List<GioHang>> call, Response<List<GioHang>> response) {
-                if (response.isSuccessful()){
-                    GioHang gioHang1=new GioHang(response.body().get(0).getIDGIOHANG(), maSV, MASP,
-                            response.body().get(0).getSoLuong()+1,
-                            response.body().get(0).getTongTien()+b);
-                    APIService.apiService.PutGIOHANG(response.body().get(0).getIDGIOHANG(),gioHang1)
-                            .enqueue(new Callback<GioHang>() {
-                        @Override
-                        public void onResponse(Call<GioHang> call, Response<GioHang> response) {
-                            if (response.isSuccessful()){
-                                onBackPressed();
-                                Toast.makeText(ChiTietSP_Activity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<GioHang> call, Throwable t) {
-                        }
-                    });
-                }else {
+                if (response.isSuccessful()) {
+                    SuKien.dismissDialog();
+                    Toast.makeText(ChiTietSP_Activity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                     onBackPressed();
-                    Toast.makeText(ChiTietSP_Activity.this, "CHịu", Toast.LENGTH_SHORT).show();
+//                    GioHang gioHang1 = new GioHang(response.body().get(0).getIDGIOHANG(), maSV, MASP,
+//                            response.body().get(0).getSoLuong() + 1,
+//                            response.body().get(0).getTongTien() + b);
+//                    APIService.apiService.PutGIOHANG(response.body().get(0).getIDGIOHANG(), gioHang1)
+//                            .enqueue(new Callback<GioHang>() {
+//                                @Override
+//                                public void onResponse(Call<GioHang> call, Response<GioHang> response) {
+//                                    if (response.isSuccessful()) {
+//                                        dialog.dismiss();
+//                                        Toast.makeText(ChiTietSP_Activity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
+//                                        onBackPressed();
+//                                    }
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<GioHang> call, Throwable t) {
+//                                    dialog.dismiss();
+//                                    Toast.makeText(ChiTietSP_Activity.this, "Check Update GioHang", Toast.LENGTH_SHORT).show();
+//                                }
+//                            });
+                } else {
+                    SuKien.dismissDialog();
+                    onBackPressed();
+                    Toast.makeText(ChiTietSP_Activity.this, "Lỗi: Giỏ hàng", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GioHang>> call, Throwable t) {
-
+                SuKien.dismissDialog();
+                Toast.makeText(ChiTietSP_Activity.this, "Không thêm được giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -118,21 +136,19 @@ public class ChiTietSP_Activity extends AppCompatActivity {
 
                 getdataAnhSP();
                 chitiet_tensp.setText(response.body().getTenSP());
-                if (response.body().getMaSV() == maSV){
-                    chitiet_tensp.setTextColor(R.drawable.edit_txt);
-                }
                 chitiet_mota.setText(response.body().getMatoSP());
                 chitiet_dongia.setText(formatter.format(response.body().getDonGia()) + " VND");
-                chitiet_soluong.setText("Số Lượng: "+response.body().getSoLuong());
-                chitiet_malop.setText("Mã Lớp:"+MALOP);
-                maSV_SP = response.body().getMaSV()+"";
+                chitiet_soluong.setText("Số Lượng: " + response.body().getSoLuong());
+                chitiet_malop.setText("Người bán:" + response.body().getMaSV());
+                maSV_SP = response.body().getMaSV() + "";
                 tongtien = response.body().getDonGia();
-
+                SuKien.dismissDialog();
             }
 
             @Override
             public void onFailure(Call<SanPham> call, Throwable t) {
-
+                Toast.makeText(ChiTietSP_Activity.this, "Lỗi: Không lấy được thông tin sản phẩm", Toast.LENGTH_SHORT).show();
+                SuKien.dismissDialog();
             }
         });
     }
@@ -142,31 +158,33 @@ public class ChiTietSP_Activity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AnhSP> call, Response<AnhSP> response) {
 
-                imageList =new ArrayList<>(); // Create image list
+                imageList = new ArrayList<>(); // Create image list
                 imageList.add(new SlideModel(response.body().getAnh1(), ScaleTypes.FIT));
                 imageList.add(new SlideModel(response.body().getAnh2(), ScaleTypes.FIT));
                 imageList.add(new SlideModel(response.body().getAnh3(), ScaleTypes.FIT));
-                imageList.add(new SlideModel(response.body().getAnh4(),ScaleTypes.FIT));
+                imageList.add(new SlideModel(response.body().getAnh4(), ScaleTypes.FIT));
 
-                imageSlider.setImageList(imageList,ScaleTypes.FIT);
+                imageSlider.setImageList(imageList, ScaleTypes.CENTER_INSIDE);
 
             }
 
             @Override
             public void onFailure(Call<AnhSP> call, Throwable t) {
-
+                SuKien.dismissDialog();
+                Toast.makeText(ChiTietSP_Activity.this, "Lỗi: Không load được ảnh sản phẩm", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void anhxa() {
+        SuKien.showDialog(this);
         btn_chitiet_themgiohang = findViewById(R.id.btn_chitiet_themgiohang);
         chitiet_tensp = findViewById(R.id.chitiet_tensp);
         chitiet_mota = findViewById(R.id.chitiet_mota);
         chitiet_dongia = findViewById(R.id.chitiet_dongia);
         imageView = findViewById(R.id.imageView);
         imageSlider = findViewById(R.id.image_slider);
-        chitiet_malop = findViewById(R.id.chitiet_malop);
+        chitiet_malop = findViewById(R.id.chitiet_masinhvien);
         chitiet_soluong = findViewById(R.id.chitiet_soluong);
         img_nhantin = findViewById(R.id.imagenhantin);
     }

@@ -67,7 +67,7 @@ public class DatHangAdapter extends RecyclerView.Adapter<DatHangAdapter.DatHangv
 
             @Override
             public void onFailure(Call<SanPham> call, Throwable t) {
-                Toast.makeText(context, "Không lấy được thông tin giỏn hàng", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Không lấy được thông tin giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }

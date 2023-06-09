@@ -8,5 +8,7 @@
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
+        android:outlineAmbientShadowColor="@color/RED"
+        android:outlineSpotShadowColor="@color/RED"
         android:layout_height="wrap_content" />
 </LinearLayout>

@@ -29,8 +29,7 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/bogoc_itemview"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/edit_txt"
                     android:src="@drawable/ic_left" />
 
                 <TextView
@@ -38,9 +37,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/baloo2_semibold"
+                    android:layout_marginEnd="35dp"
+                    android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                     android:text="Thanh toán"
                     android:gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/white"
                     android:textSize="30dp" />
 
@@ -54,16 +56,14 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:drawableStart="@drawable/ic_baseline_contact_phone_24"
-                android:drawablePadding="20dp"
-                android:fontFamily="@font/baloo2_semibold"
+                android:drawableStart="@drawable/user"
+                android:drawablePadding="13dp"
                 android:hint="HỌ VÀ TÊN"
                 android:imeOptions="actionNext"
                 android:maxLength="100"
-                android:enabled="false"
                 android:paddingStart="20dp"
-                android:textColor="@color/text"
-                android:textColorHint="@color/Edt_text" />
+                android:textColor="@color/black"
+                android:textColorHint="#918F8F" />
 
             <EditText
                 android:id="@+id/txt_sdt_tt"
@@ -73,17 +73,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:backgroundTint="@color/Button"
-                android:drawableStart="@drawable/ic_baseline_contact_phone_24"
-                android:drawablePadding="20dp"
-                android:fontFamily="@font/baloo2_semibold"
+                android:drawableStart="@drawable/call"
+                android:drawablePadding="13dp"
                 android:hint="SỐ ĐIỆN THOẠI"
                 android:imeOptions="actionNext"
                 android:inputType="number"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/text"
-                android:textColorHint="@color/Edt_text" />
+                android:textColor="@color/black"
+                android:textColorHint="#918F8F" />
 
             <EditText
                 android:id="@+id/txt_diachi_tt"
@@ -93,16 +91,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:drawableStart="@drawable/ic_baseline_maps_home_work_24"
+                android:drawableStart="@drawable/diachi_icon"
                 android:drawablePadding="20dp"
-                android:fontFamily="@font/baloo2_semibold"
                 android:hint="ĐỊA CHỈ NHẬN HÀNG"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/text"
-                android:textColorHint="@color/Edt_text" />
+                android:textColor="@color/black"
+                android:textColorHint="#918F8F" />
 
             <EditText
                 android:id="@+id/txt_ghichu_tt"
@@ -112,17 +109,15 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:backgroundTint="@color/Button"
-                android:drawableStart="@drawable/ic_notes"
-                android:drawablePadding="16dp"
-                android:fontFamily="@font/baloo2_semibold"
+                android:drawableStart="@drawable/notepad"
+                android:drawablePadding="12dp"
                 android:hint="GHI CHÚ"
                 android:imeOptions="actionNext"
                 android:inputType="text"
                 android:maxLength="100"
                 android:paddingStart="20dp"
-                android:textColor="@color/text"
-                android:textColorHint="@color/Edt_text" />
+                android:textColor="@color/black"
+                android:textColorHint="#918F8F" />
 
 
             <LinearLayout
@@ -147,7 +142,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="@font/baloo2_semibold"
+                        android:fontFamily="@font/playfair_pt_black"
                         android:text="Tổng thanh toán :"
                         android:textColor="@color/text"
                         android:textSize="20dp" />
@@ -168,12 +163,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="40dp"
+                    android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                     android:background="@drawable/edit_txt"
                     android:backgroundTint="@color/Button"
                     android:text="Thanh toán"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="25sp" />
+                    android:textSize="27sp" />
 
             </LinearLayout>
 

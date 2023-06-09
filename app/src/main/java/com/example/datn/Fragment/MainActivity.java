@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.datn.BUS.SuKien;
 import com.example.datn.GUI.ThemSanPham;
 import com.example.datn.R;
 import com.example.datn.databinding.ActivityMainBinding;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case R.id.shorts:
                     Toast.makeText(this, "Chức năng đang phát triển", Toast.LENGTH_SHORT).show();
+                    replaceFragment(new SanPhamDaDangFragment());
                     break;
                 case R.id.subscriptions:
                     replaceFragment(new  GioHangFragment());

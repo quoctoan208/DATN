@@ -1,5 +1,6 @@
 package com.example.datn.GUI;
 
+import static com.example.datn.Fragment.HomeFragment.listTL;
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.app.Activity;
@@ -9,18 +10,22 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.datn.Adapter.SpinnerAdapter;
 import com.example.datn.Api.APIService;
 import com.example.datn.Fragment.MainActivity;
 import com.example.datn.Model.AnhSP;
 import com.example.datn.Model.SanPham;
+import com.example.datn.Model.TheLoai;
 import com.example.datn.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -39,6 +44,8 @@ import retrofit2.Response;
 
 public class ThemSanPham extends Activity {
     private static final String TAG = "MyActivity";
+    private Spinner spinner;
+    private SpinnerAdapter spinnerAdapter;
     private EditText edt_masp, edt_tensp, edt_soluong, edt_dongia, edt_motasp;
     private Button btn_addSanPham, themanh;
     List<ImageView> imageViews = new ArrayList<>();
@@ -46,15 +53,106 @@ public class ThemSanPham extends Activity {
     public static List<AnhSP> anhSPList;
     private static final int REQUEST_SELECT_IMAGES = 1;
     private SanPham sanPham;
-    AnhSP anhSP ;
+    static AnhSP anhSP ;
     String mAnh1;
+
+    String maTL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_themsanpham);
         anhxa();
+        setUp();
         onclick();
+    }
+
+
+    private void setUp() {
+        anhSPList = new ArrayList<>();
+        anhSP = new AnhSP();
+
+        //Load spiner
+        spinnerAdapter = new SpinnerAdapter(this, R.layout.item_select_spiner, getlistTheLoai());
+        spinner.setAdapter(spinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                maTL = spinnerAdapter.getItem(i).getMaTL();
+                Toast.makeText(ThemSanPham.this, " Chọn "+maTL, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    private List<TheLoai> getlistTheLoai() {
+        List<TheLoai> theLoais = new ArrayList<>();
+        theLoais = listTL;
+        return theLoais;
+    }
+
+    private void onclick() {
+        btn_addSanPham.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addsanphamAPI();
+            }
+        });
+
+        themanh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                galleryIntent.setType("image/*");
+                galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                startActivityForResult(Intent.createChooser(galleryIntent, "SELECT"), REQUEST_SELECT_IMAGES);
+            }
+        });
+    }
+
+
+    @Override // set ảnh đã thêm lên ImageView
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SELECT_IMAGES && resultCode == RESULT_OK && data != null) {
+            // Get the selected image URI(s) from the Intent
+            ClipData clipData = data.getClipData();
+            if (clipData != null && clipData.getItemCount() > 0 && clipData.getItemCount() <= 5) {
+                // tải ảnh vừa thêm lên Imagaview
+                for (int i = 0; i < clipData.getItemCount(); i++) {
+                    Uri imageUri = clipData.getItemAt(i).getUri();
+                    ImageView imageView = imageViews.get(i);
+                    imgUri.add(imageUri);
+                    imageView.setImageURI(imageUri);
+                }
+                // Xóa ảnh thừa
+                for (int i = clipData.getItemCount(); i < imageViews.size(); i++) {
+                    ImageView imageView = imageViews.get(i);
+                    imageView.setVisibility(View.GONE);
+                }
+            } else {
+                //Lấy uri từ ảnh được chọn
+                Uri imageUri = data.getData();
+                if (imageUri != null) {
+                    //thêm ảnh vào img
+                    ImageView imageView = imageViews.get(0);
+                    imgUri.add(imageUri);
+                    imageView.setImageURI(imageUri);
+                    // xóa ảnh thừa
+//                    for (int i = 1; i < imageViews.size(); i++) {
+//                        ImageView unusedImageView = imageViews.get(i);
+//                        unusedImageView.setVisibility(View.GONE);
+//                    }
+                } else {
+                    // Handle error if the user did not select an image
+                    Toast.makeText(this, "Chưa có ảnh", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
 
     //Add ảnh lên firebase
@@ -63,7 +161,8 @@ public class ThemSanPham extends Activity {
         final String imageName = "anh" + (imageCount + 1);
 
         // Tham chiếu đến Firebase Storage
-        final StorageReference storageRef = FirebaseStorage.getInstance().getReference().child(""+anhSP.getMaSP()).child(imageName);
+        final StorageReference storageRef = FirebaseStorage.getInstance().getReference()
+                .child(""+anhSP.getMaSP()).child(imageName);
 
         // Tạo task để upload ảnh lên Firebase Storage
         UploadTask uploadTask = storageRef.putFile(imageUri);
@@ -98,8 +197,7 @@ public class ThemSanPham extends Activity {
 
                         // Nếu đã upload hết ảnh, cập nhật đối tượng AnhSP lên Realtime Database
                         if (imageCount == 4) {
-                            addAnhSPAPI(anhSP);
-                            Toast.makeText(ThemSanPham.this, "Thêm thành công ảnh sản phẩm", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ThemSanPham.this, " Có "+ imageCount +" ảnh SP", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -113,66 +211,6 @@ public class ThemSanPham extends Activity {
         });
     }
 
-    @Override // set ảnh đã thêm lên ImageView
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_SELECT_IMAGES && resultCode == RESULT_OK && data != null) {
-            // Get the selected image URI(s) from the Intent
-            ClipData clipData = data.getClipData();
-            if (clipData != null && clipData.getItemCount() > 0 && clipData.getItemCount() <= 5) {
-                // tải ảnh vừa thêm lên Imagaview
-                for (int i = 0; i < clipData.getItemCount(); i++) {
-                    Uri imageUri = clipData.getItemAt(i).getUri();
-                    ImageView imageView = imageViews.get(i);
-                    imgUri.add(imageUri);
-                    imageView.setImageURI(imageUri);
-                }
-                // Xóa ảnh thừa
-                for (int i = clipData.getItemCount(); i < imageViews.size(); i++) {
-                    ImageView imageView = imageViews.get(i);
-                    imageView.setVisibility(View.GONE);
-                }
-            } else {
-                // Get the selected image URI from the Intent
-                Uri imageUri = data.getData();
-                if (imageUri != null) {
-                    // Set the selected image to the first ImageView object
-                    ImageView imageView = imageViews.get(0);
-                    imgUri.add(imageUri);
-                    imageView.setImageURI(imageUri);
-                    // Hide any unused ImageView objects
-                    for (int i = 1; i < imageViews.size(); i++) {
-                        ImageView unusedImageView = imageViews.get(i);
-                        unusedImageView.setVisibility(View.GONE);
-                    }
-                } else {
-                    // Handle error if the user did not select an image
-                    Toast.makeText(this, "Chưa có ảnh", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-    }
-    private void onclick() {
-        btn_addSanPham.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addsanphamAPI();
-                anhSPList.add(anhSP);
-            }
-        });
-
-        themanh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent galleryIntent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-                galleryIntent.setType("image/*");
-                galleryIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                startActivityForResult(Intent.createChooser(galleryIntent, "Thêm ảnh"), REQUEST_SELECT_IMAGES);
-            }
-        });
-    }
-
     public void addsanphamAPI() {
         String mMaSP = edt_masp.getText().toString();
         String mTenSP = edt_tensp.getText().toString();
@@ -180,9 +218,7 @@ public class ThemSanPham extends Activity {
         float mDonGia = Float.parseFloat(edt_dongia.getText().toString());
         String mMota = edt_motasp.getText().toString();
         int mMaSV = maSV;
-        int mXetDuyet = 1;
-        String mMaTL = "L01";
-        sanPham = new SanPham(mMaSP, mMaTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
+        int mXetDuyet = 1;// chưa xác nhận
 
         //Thêm ảnh sản phẩm lên firebase
         anhSP.setMaSP(mMaSP);
@@ -190,17 +226,14 @@ public class ThemSanPham extends Activity {
             Uri imageUri = imgUri.get(i);
             addAnhSPFireBase( i, imageUri);
         }
+        sanPham = new SanPham(mMaSP, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
 
         //thêm dữ liệu vào dbSanpham
         APIService.apiService.PostSANPHAM(sanPham).enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (response.body() != null) {
-                    if (response.body() > 0) {
-                        Toast.makeText(ThemSanPham.this, "Thêm ok rồi đấy", Toast.LENGTH_SHORT);
-                        startActivity(new Intent(ThemSanPham.this,MainActivity.class));
-                        finish();
-                    }
+                if (response.isSuccessful()) {
+                    addAnhSPAPI (anhSP); //Thêm ảnh sp lên API
                 }
             }
 
@@ -223,11 +256,13 @@ public class ThemSanPham extends Activity {
             }
             @Override
             public void onFailure(Call<List<AnhSP>> call, Throwable t) {
+                Toast.makeText(ThemSanPham.this, "Không thêm được ảnh lên API", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void anhxa() {
+        spinner = findViewById(R.id.planets_spinner);
         edt_masp = findViewById(R.id.edt_add_masp);
         edt_tensp = findViewById(R.id.edt_add_tensp);
         edt_soluong = findViewById(R.id.edt_add_soluongsp);

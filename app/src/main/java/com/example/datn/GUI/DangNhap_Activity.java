@@ -1,6 +1,5 @@
 package com.example.datn.GUI;
 
-import static com.example.datn.BUS.SuKien.LOATDING;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -13,9 +12,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.Fragment.MainActivity;
-import com.example.datn.Model.NguoiDung;
+import com.example.datn.Model.TaiKhoan;
 import com.example.datn.R;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,9 +25,10 @@ import retrofit2.Response;
 
 public class DangNhap_Activity extends AppCompatActivity {
     private EditText txt_masvdangnhap,txt_password;
+
+    public  static TaiKhoan taikhoancuatoi;
     private Button btn_login;
-    public static int maSV =10119736,MALOP = 101195;
-    private Dialog dialog;
+    public static int maSV ,MALOP = 101181;//10118369
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +42,7 @@ public class DangNhap_Activity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LOATDING(dialog);
+                SuKien.showDialog(DangNhap_Activity.this);
                 Dangnhap();
             }
         });
@@ -49,20 +52,33 @@ public class DangNhap_Activity extends AppCompatActivity {
         int masv=Integer.parseInt(txt_masvdangnhap.getText().toString());
         String password=txt_password.getText().toString();
         if (password == ""){
-            dialog.dismiss();
+            SuKien.dismissDialog();
             Toast.makeText(this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
         }else {
-
+            SuKien.showDialog(DangNhap_Activity.this);
             APIService.apiService.Kiemtra(masv,password).enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()){
                             maSV =masv;
-                            getUser();
+                            APIService.apiService.GetTaikhoan(masv).enqueue(new Callback<TaiKhoan>() {
+                                @Override
+                                public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
+                                    if (response.isSuccessful()){
+                                        taikhoancuatoi = response.body();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<TaiKhoan> call, Throwable t) {
+                                    Toast.makeText(DangNhap_Activity.this, "không lấy đợc dữ liệu tài khoản", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             Toast.makeText(DangNhap_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                            SuKien.dismissDialog();
                             startActivity(new Intent(DangNhap_Activity.this, MainActivity.class));
                     }else {
-                        dialog.dismiss();
+                        SuKien.dismissDialog();
                         Toast.makeText(DangNhap_Activity.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -71,32 +87,17 @@ public class DangNhap_Activity extends AppCompatActivity {
                 public void onFailure(Call<String> call, Throwable t) {
                     Toast.makeText(DangNhap_Activity.this, "out", Toast.LENGTH_SHORT).show();
 
-                    dialog.dismiss();
+                    SuKien.dismissDialog();
                 }
             });
         }
     }
 
-    private void getUser(){
-        APIService.apiService.GetNGUOIDUNG(maSV).enqueue(new Callback<NguoiDung>() {
-            @Override
-            public void onResponse(Call<NguoiDung> call, Response<NguoiDung> response) {
-                if(response.body() != null){
-                    MALOP = response.body().getMaLop();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NguoiDung> call, Throwable t) {
-
-            }
-        });
-    }
 
     private void anhxa() {
+        taikhoancuatoi= new TaiKhoan();
         txt_masvdangnhap =findViewById(R.id.txt_email);
         txt_password=findViewById(R.id.txt_password);
         btn_login=findViewById(R.id.btn_login);
-        dialog=new Dialog(this);
     }
 }

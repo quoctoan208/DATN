@@ -13,7 +13,7 @@
         android:layout_height="180dp"
         android:layout_gravity="top"
         android:scaleType="centerCrop"
-        android:src="@color/text" />
+        android:src="@color/Button" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,7 +50,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_hoTen"
+                    android:id="@+id/tv_hoTentaikhoan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/baloo2_semibold"
@@ -74,140 +74,132 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:padding="3dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="10dp"
             android:background="@drawable/bogoc_backgroud_account"
-            android:layout_height="match_parent"
-            >
+            android:padding="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:padding="10dp"
                 android:background="@color/white"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <Button
+                <android.widget.Button
                     android:id="@+id/btnDonMua"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
                     android:drawableStart="@drawable/baseline_edit_calendar_24"
                     android:drawableEnd="@drawable/baseline_navigate_next_24"
-                    android:drawablePadding="10dp"
-                    android:backgroundTint="@color/Button"
-                    android:elevation="30dp"
-                    android:gravity="left"
+                    android:drawablePadding="14dp"
+                    android:gravity="fill"
                     android:padding="10dp"
                     android:text="Đơn mua"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
-                <Button
-                    android:id="@+id/btnAddShop"
+                <android.widget.Button
+                    android:id="@+id/btndonban"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
                     android:drawableStart="@drawable/add_product"
                     android:drawableEnd="@drawable/baseline_navigate_next_24"
-                    android:drawablePadding="14dp"
-                    android:backgroundTint="@color/Button"
+                    android:drawablePadding="10dp"
                     android:elevation="30dp"
-                    android:gravity="left"
+                    android:gravity="fill"
                     android:padding="10dp"
                     android:text="Đơn bán"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
-                <Button
-                    android:id="@+id/btn_LsuMua"
+                <android.widget.Button
+                    android:id="@+id/btn_spyeuthich"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
                     android:drawableStart="@drawable/shop"
                     android:drawableEnd="@drawable/baseline_navigate_next_24"
                     android:drawablePadding="14dp"
-                    android:backgroundTint="@color/Button"
                     android:elevation="30dp"
-                    android:layout_marginTop="5dp"
                     android:gravity="left"
                     android:padding="10dp"
-                    android:text="Lịch sử mua hàng"
+                    android:text="Sản phẩm yêu thích"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="18dp" />
 
-                <Button
+                <android.widget.Button
                     android:id="@+id/btnEditUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
                     android:drawableStart="@drawable/account"
                     android:drawableEnd="@drawable/baseline_navigate_next_24"
                     android:drawablePadding="14dp"
-                    android:backgroundTint="@color/Button"
-                    android:layout_marginBottom="5dp"
                     android:elevation="30dp"
-                    android:textColor="@color/white"
                     android:gravity="left"
                     android:padding="10dp"
                     android:text="Thiết lập tài khoản"
                     android:textAllCaps="false"
+                    android:textColor="@color/white"
                     android:textSize="18dp" />
 
 
-
-                <LinearLayout
+                <android.widget.Button
+                    android:id="@+id/btnHelp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@color/white"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
+                    android:drawableStart="@drawable/help"
+                    android:drawableEnd="@drawable/baseline_navigate_next_24"
+                    android:drawablePadding="10dp"
                     android:elevation="16dp"
-                    android:orientation="vertical">
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="Trung tâm trợ giúp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
-                    <Button
-                        android:id="@+id/btnHelp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/edit_txt"
-                        android:drawableStart="@drawable/help"
-                        android:drawableEnd="@drawable/baseline_navigate_next_24"
-                        android:drawablePadding="10dp"
-                        android:backgroundTint="@color/Button"
-                        android:elevation="16dp"
-                        android:gravity="left"
-                        android:padding="10dp"
-                        android:text="Trung tâm trợ giúp"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-
-                    <Button
-                        android:id="@+id/btnLogout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/edit_txt"
-                        android:drawableStart="@drawable/shutdown"
-                        android:drawableEnd="@drawable/baseline_navigate_next_24"
-                        android:drawablePadding="10dp"
-                        android:elevation="30dp"
-                        android:backgroundTint="@color/Button"
-                        android:gravity="left"
-                        android:padding="10dp"
-                        android:text="Đăng xuất"
-                        android:textAllCaps="false"
-                        android:textColor="@color/white"
-                        android:textSize="18dp" />
-                </LinearLayout>
+                <android.widget.Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/edit_txt"
+                    android:backgroundTint="@color/Button"
+                    android:drawableStart="@drawable/shutdown"
+                    android:drawableEnd="@drawable/baseline_navigate_next_24"
+                    android:drawablePadding="10dp"
+                    android:elevation="30dp"
+                    android:gravity="left"
+                    android:padding="10dp"
+                    android:text="Đăng xuất"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="18dp" />
 
             </LinearLayout>
         </ScrollView>
@@ -220,10 +212,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
-        android:backgroundTint="@color/Button"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_left"
+        android:backgroundTint="@color/Button"
         android:padding="10dp"
-         />
+        android:src="@drawable/ic_left" />
 
 </FrameLayout>

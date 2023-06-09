@@ -44,7 +44,7 @@ public class DonHangActivity extends AppCompatActivity {
         viewpager.setAdapter(donhang_viewPage);
         tblayout.setTabTextColors(ContextCompat.getColor(this, R.color.black),
                 ContextCompat.getColor(this, R.color.teal_200));
-        String[] tabTitles = {"Chờ xác nhận", "Đang giao", "Đã giao", "Đã hủy"};
+        String[] tabTitles = {"Chờ xác nhận","Chờ Gửi Hàng","Đang Giao hàng", "Đã nhận hàng", "Đã hủy"};
 
         new TabLayoutMediator(tblayout, viewpager, (tab, position) -> {
             tab.setText(tabTitles[position]);

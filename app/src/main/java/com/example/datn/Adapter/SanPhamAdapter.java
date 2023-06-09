@@ -40,9 +40,11 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ProductV
     public interface onItemClickListener {
         void onItemClick(int pos, View view);
     }
+
     public void setOnClickListener(SanPhamAdapter.onItemClickListener listener) {
         this.listener = listener;
     }
+
     @SuppressLint("NotifyDataSetChanged")
     public void setData(List<SanPham> list) {
         this.sanPhamList = list;
@@ -57,43 +59,35 @@ public class SanPhamAdapter extends RecyclerView.Adapter<SanPhamAdapter.ProductV
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.sanpham_row_item, parent, false);
-        return new ProductViewHolder(view, listener);
-    }
-
-    @Override
-    public int getItemCount() {
-        if (sanPhamList != null) {
-            return sanPhamList.size();
-        }
-        return sanPhamList.size();
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sanpham_row_item, parent, false);
+        // lets create a recyclerview row item layout file
+        return new SanPhamAdapter.ProductViewHolder(view,listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
         SanPham sanPham = sanPhamList.get(position);
-        if(sanPham != null){
-            Glide.with(context).load(sanPham.getAnhSP()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(15))).error(R.drawable.anhspdemo).into(holder.img);
-            holder.txt_name.setText(sanPham.getTenSP());
-            holder.txt_gia.setText(formatter.format(sanPham.getDonGia()) + " VNĐ");
-            holder.txt_sl.setText("Số lượng: " + sanPham.getSoLuong());
-            holder.txt_masv.setText("MSV: "+sanPham.getMaSV());
-        } else {
-            Toast.makeText(context, "Không có sản phẩm", Toast.LENGTH_SHORT).show();
-        }
+        Glide.with(context).load(sanPham.getAnhSP()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(15))).error(R.drawable.help).into(holder.img);
+        holder.txt_name.setText(sanPham.getTenSP());
+        holder.txt_gia.setText(formatter.format(sanPham.getDonGia()) + " VNĐ");
+        holder.txt_sl.setText("Số lượng: " + sanPham.getSoLuong());
+        holder.txt_masv.setText("MSV: " + sanPham.getMaSV());
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return sanPhamList.size();
     }
 
 
-
-    public  class ProductViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout layout;
+    public class ProductViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
         TextView txt_name, txt_sl, txt_gia, txt_masv;
 
-        public ProductViewHolder(@NonNull View itemView , SanPhamAdapter.onItemClickListener listener) {
+        public ProductViewHolder(@NonNull View itemView, SanPhamAdapter.onItemClickListener listener) {
             super(itemView);
 
-            layout = itemView.findViewById(R.id.layout_itemsp);
             img = itemView.findViewById(R.id.img_sp);
             txt_name = itemView.findViewById(R.id.txt_tensp);
             txt_sl = itemView.findViewById(R.id.txt_soluongsp);

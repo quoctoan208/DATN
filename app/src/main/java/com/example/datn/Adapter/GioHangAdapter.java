@@ -2,7 +2,7 @@ package com.example.datn.Adapter;
 
 
 import static com.example.datn.BUS.SuKien.formatter;
-import static com.example.datn.GUI.GioHangActivity.getdata;
+import static com.example.datn.Fragment.GioHangFragment.getdata;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -37,7 +37,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
     List<GioHang> list;
     static List<SanPham> phamList;
     Activity context;
-    int GiaTien =0;
+    int GiaTien = 0;
 
     public GioHangAdapter(List<GioHang> list, Activity context) {
         this.list = list;
@@ -54,7 +54,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
     @Override
     public void onBindViewHolder(@NonNull gio_hang_viewhodler holder, @SuppressLint("RecyclerView") int position) {
         GioHang GioHang = list.get(position);
-        holder.txt_sl.setText(GioHang.getSoLuong()+"");
+        holder.txt_sl.setText(GioHang.getSoLuong() + "");
         final int[] sosp = {GioHang.getSoLuong()};
         final int[] sosp1 = {GioHang.getSoLuong()};
         get_data(GioHang, holder);
@@ -103,15 +103,15 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
         holder.img_cong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (sosp[0] <= phamList.get(position).getSoLuong()){
+                if (sosp[0] <= phamList.get(position).getSoLuong()) {
                     sosp[0] = sosp[0] + 1;
                     sosp1[0] = sosp[0];
                     holder.txt_sl.setText(sosp[0] + "");
                     GioHang gioHang1 = new GioHang(GioHang.getIDGIOHANG(), GioHang.getMaSV(), GioHang.getMaSP(), sosp[0],
                             sosp[0] * GiaTien);
                     Putgiohang(GioHang.getIDGIOHANG(), gioHang1);
-                }
-                else Toast.makeText(context, "Chỉ có "+sosp[0]+" sản phẩm được đăng bán", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(context, "Chỉ có " + sosp[0] + " sản phẩm được đăng bán", Toast.LENGTH_SHORT).show();
             }
         });
         holder.img_delete.setOnClickListener(new View.OnClickListener() {
@@ -157,9 +157,9 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                     SanPham sanPham = response.body();
                     Glide.with(context).load(sanPham.getAnhSP()).apply(new RequestOptions().transform(new CenterCrop()).transform(new RoundedCorners(15))).error(R.drawable.anhspdemo).into(holder.img);
                     holder.txt_name.setText(sanPham.getTenSP());
-                    holder.txt_masv.setText("Người bán: "+sanPham.getMaSV());
+                    holder.txt_masv.setText("Người bán: " + sanPham.getMaSV());
                     holder.txt_gia.setText(formatter.format(sanPham.getDonGia()) + " VNĐ");
-                    GiaTien = (int)sanPham.getDonGia();
+                    GiaTien = (int) sanPham.getDonGia();
                 }
             }
 

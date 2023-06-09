@@ -2,9 +2,12 @@ package com.example.datn.Fragment;
 
 //import static com.example.doan4.GUI.DangNhap_Activity.USENAME;
 
+import static com.example.datn.GUI.ChiTietDonHangActivity.maDHChon;
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datn.Adapter.DonHangAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.GUI.ChiTietDonHangActivity;
 import com.example.datn.GUI.DonHangActivity;
 import com.example.datn.Model.DonHang;
 import com.example.datn.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,12 +36,12 @@ import retrofit2.Response;
 
 
 public class CXNFragment extends Fragment {
-    public static RecyclerView recyclerView;
-    public static LinearLayout linearLayout;
+    static RecyclerView recyclerView;
+    static LinearLayout linearLayout;
     public static DonHangActivity donHangActivity;
-    public CXNFragment() {
-        // Required empty public constructor
-    }
+    static List<DonHang> donHangList;
+    static DonHangAdapter donHangAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +54,29 @@ public class CXNFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         anhxa(view);
+        setUpViewCXN();
         getdata_CXN();
+        onClicks();
+    }
+
+    private void onClicks() {
+        donHangAdapter.setOnClickListener(new DonHangAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int pos, View view) {
+                DonHang donHang = donHangList.get(pos);
+                maDHChon = donHang.getMaDH();
+                startActivity(new Intent(getContext(), ChiTietDonHangActivity.class));
+            }
+        });
+    }
+
+
+    public static void setUpViewCXN() {
+        donHangList = new ArrayList<>();
+        donHangAdapter = new DonHangAdapter(donHangList,donHangActivity);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(donHangActivity, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(donHangAdapter);
     }
 
     public static void getdata_CXN() {
@@ -57,27 +84,28 @@ public class CXNFragment extends Fragment {
             @Override
             public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                 if (response.isSuccessful()) {
-                    recyclerView.setVisibility(View.VISIBLE);
+                    donHangList.addAll(response.body());
+                    Log.d("TAG", "onResponse: "+donHangList.size());
+                    donHangAdapter.setData(donHangList);
                     linearLayout.setVisibility(View.GONE);
-                    DonHangAdapter order_adapterBUS = new DonHangAdapter(response.body(),donHangActivity);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(donHangActivity));
-                    recyclerView.setAdapter(order_adapterBUS);
-                } else {
-                    recyclerView.setVisibility(View.GONE);
-                    linearLayout.setVisibility(View.VISIBLE);
+                }
+                else {
+                    Log.e("DITME", "Response error: " + response.code() + " - " + response.message());
+                    Toast.makeText(donHangActivity, "Không có đơn hàng", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<DonHang>> call, Throwable t) {
-                Toast.makeText(donHangActivity.getApplication(), "Không tìm thấy đơn CXN", Toast.LENGTH_SHORT).show();
+                linearLayout.setVisibility(View.VISIBLE);
+                Log.d("TAG", "onFailure: "+t.getMessage());
             }
         });
     }
 
     private void anhxa(View view) {
-        donHangActivity= (DonHangActivity) getActivity();
-        recyclerView = view.findViewById(R.id.RecyclerView);
-        linearLayout = view.findViewById(R.id.LinearLayout);
+        donHangActivity = (DonHangActivity) getActivity();
+        recyclerView = view.findViewById(R.id.RecyclerViewCXN);
+        linearLayout = view.findViewById(R.id.LinearLayoutCXN);
     }
 }

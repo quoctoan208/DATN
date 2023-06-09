@@ -5,6 +5,7 @@ import static com.example.datn.GUI.DangNhap_Activity.maSV;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.datn.Adapter.GioHangAdapter;
 import com.example.datn.Api.APIService;
 import com.example.datn.GUI.DatHangActivity;
-import com.example.datn.GUI.GioHangActivity;
 import com.example.datn.Model.GioHang;
 import com.example.datn.R;
 
@@ -70,7 +70,7 @@ public class GioHangFragment extends Fragment {
         });
     }
 
-    public void getdata() {
+    public static void getdata() {
         // Gọi API để lấy danh sách giỏ hàng của sinh viên dựa trên mã số sinh viên
         APIService.apiService.Getgiohang(maSV).enqueue(new Callback<List<GioHang>>() {
             @Override
@@ -86,8 +86,8 @@ public class GioHangFragment extends Fragment {
                                 ,gioHang.getMaSP(),gioHang.getSoLuong(),gioHang.getTongTien());
                         txt_tongtien.setText(formatter.format(tongtien) + " VND");
                         gioHangList.add(gioHang1);
-                        gio_hangs.notifyDataSetChanged();
                     }
+                    gio_hangs.notifyDataSetChanged();
 
                 } else {
                     txt_error.setVisibility(View.VISIBLE);
@@ -97,7 +97,7 @@ public class GioHangFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<GioHang>> call, Throwable t) {
-                Toast.makeText(getContext(), "Không tải được giỏ hàng", Toast.LENGTH_SHORT).show();
+                Log.d("TAG", "onFailure: "+t.getMessage());
             }
         });
     }

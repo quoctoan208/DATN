@@ -1,6 +1,6 @@
 package com.example.datn.Model;
 
-public class NguoiDung {
+public class TaiKhoan {
     private int sDT;
     private String matKhau;
     private String hoVaTen;
@@ -8,9 +8,9 @@ public class NguoiDung {
     private String gioiTinh;
     private int maLop;
     private int maSV;
-    public NguoiDung(){}
+    private float danhGia;
 
-
+    public TaiKhoan(){}
 
     public int getsDT() {
         return sDT;
@@ -68,7 +68,15 @@ public class NguoiDung {
         this.maSV = maSV;
     }
 
-    public NguoiDung( int sDT, String matKhau, String hoVaTen, String diaChi, String gioiTinh, int maLop, int maSV) {
+    public float getDanhGia() {
+        return danhGia;
+    }
+
+    public void setDanhGia(float danhGia) {
+        this.danhGia = danhGia;
+    }
+
+    public TaiKhoan(int sDT, String matKhau, String hoVaTen, String diaChi, String gioiTinh, int maLop, int maSV, float danhGia) {
         this.sDT = sDT;
         this.matKhau = matKhau;
         this.hoVaTen = hoVaTen;
@@ -76,5 +84,6 @@ public class NguoiDung {
         this.gioiTinh = gioiTinh;
         this.maLop = maLop;
         this.maSV = maSV;
+        this.danhGia = danhGia;
     }
 }

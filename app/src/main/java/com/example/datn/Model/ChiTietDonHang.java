@@ -1,8 +1,7 @@
 package com.example.datn.Model;
 
 public class ChiTietDonHang {
-    private String tenSP;
-    private float donGia;
+    private String id;
     private int soLuong;
     private float tongTienThanhToan;
     private String maSP;
@@ -10,20 +9,12 @@ public class ChiTietDonHang {
 
     public ChiTietDonHang(){}
 
-    public String getTenSP() {
-        return tenSP;
+    public String getId() {
+        return id;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
-    }
-
-    public float getDonGia() {
-        return donGia;
-    }
-
-    public void setDonGia(float donGia) {
-        this.donGia = donGia;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getSoLuong() {
@@ -58,9 +49,8 @@ public class ChiTietDonHang {
         this.maDH = maDH;
     }
 
-    public ChiTietDonHang( String tenSP, float donGia, int soLuong, float tongTienThanhToan, String maSP, String maDH) {
-        this.tenSP = tenSP;
-        this.donGia = donGia;
+    public ChiTietDonHang(String id, int soLuong, float tongTienThanhToan, String maSP, String maDH) {
+        this.id = id;
         this.soLuong = soLuong;
         this.tongTienThanhToan = tongTienThanhToan;
         this.maSP = maSP;

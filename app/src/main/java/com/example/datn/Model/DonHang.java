@@ -11,7 +11,10 @@ public class DonHang {
     private int maSVMua;
     private int maSVBan;
     private String maDH;
-    private Date ngayGiaoDich;
+    private String ngayGiaoDich;
+    private int SDT;
+    private String hoVaTen;
+    private String ghiChu;
 
     public DonHang(){}
 
@@ -71,15 +74,41 @@ public class DonHang {
         this.maDH = maDH;
     }
 
-    public Date getNgayGiaoDich() {
+    public String getNgayGiaoDich() {
         return ngayGiaoDich;
     }
 
-    public void setNgayGiaoDich(Date ngayGiaoDich) {
+    public void setNgayGiaoDich(String ngayGiaoDich) {
         this.ngayGiaoDich = ngayGiaoDich;
     }
 
-    public DonHang(String diaChiGiaoHang, String phuongThucThanhToan, float tongTienThanhToan, int trangThaiDH, int maSVMua, int maSVBan, String maDH, Date ngayGiaoDich) {
+    public int getSDT() {
+        return SDT;
+    }
+
+    public void setSDT(int SDT) {
+        this.SDT = SDT;
+    }
+
+    public String getHoVaTen() {
+        return hoVaTen;
+    }
+
+    public void setHoVaTen(String hoVaTen) {
+        this.hoVaTen = hoVaTen;
+    }
+
+    public String getGhiChu() {
+        return ghiChu;
+    }
+
+    public void setGhiChu(String ghiChu) {
+        this.ghiChu = ghiChu;
+    }
+
+    public DonHang(String diaChiGiaoHang, String phuongThucThanhToan, float tongTienThanhToan,
+                   int trangThaiDH, int maSVMua, int maSVBan, String maDH,
+                   String ngayGiaoDich, int SDT, String hoVaTen, String ghiChu) {
         this.diaChiGiaoHang = diaChiGiaoHang;
         this.phuongThucThanhToan = phuongThucThanhToan;
         this.tongTienThanhToan = tongTienThanhToan;
@@ -88,5 +117,8 @@ public class DonHang {
         this.maSVBan = maSVBan;
         this.maDH = maDH;
         this.ngayGiaoDich = ngayGiaoDich;
+        this.SDT = SDT;
+        this.hoVaTen = hoVaTen;
+        this.ghiChu = ghiChu;
     }
 }

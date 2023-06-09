@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#E3E3E3"
+    android:layout_marginBottom="50dp"
+
     tools:context=".Fragment.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,78 +17,103 @@
         android:gravity="center_vertical"
         android:background="@color/Button"
         android:backgroundTint="@color/text"
-        android:fontFamily="@font/baloo2_semibold"
-        android:text="Tìm kiếm"
-        android:textSize="20dp"
-        android:drawablePadding="10dp"
+        android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
+        android:text="Tìm Kiếm"
+        android:textSize="23dp"
+        android:drawablePadding="20dp"
         android:textColor="@color/white"/>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
         android:layout_marginTop="50dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
             android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:background="#E3E3E3"
             android:orientation="vertical" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:text="Thể loại"
-                android:fontFamily="@font/baloo2_semibold"
-                />
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/white"
+                android:padding="5dp"
+                android:background="@drawable/edit_txt"
+                android:orientation="vertical">
                 <TextView
-                    android:id="@+id/txt_tatca"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:paddingStart="18dp"
-                    android:paddingTop="12dp"
-                    android:paddingEnd="18dp"
-                    android:paddingBottom="12dp"
-                    android:background="@drawable/edit_txt"
-                    android:backgroundTint="@color/Button"
-                    android:text="Tất cả"
-                    android:textColor="#FFFFFF"
-                    android:fontFamily="@font/baloo2_semibold"
-                    android:textSize="20dp"
-                    android:textStyle="italic" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/tl_recycler"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="25dp"
+                    android:text="Thể loại"
+                    android:fontFamily="@font/font_item_text"
+                    />
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="15dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/txt_tatca"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:paddingStart="18dp"
+                        android:paddingTop="12dp"
+                        android:paddingEnd="18dp"
+                        android:paddingBottom="12dp"
+                        android:background="@drawable/edit_txt"
+                        android:backgroundTint="@color/text"
+                        android:text="Tất cả"
+                        android:textColor="#FFFFFF"
+                        android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
+                        android:textSize="15dp"
+                        android:textStyle="italic" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/tl_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:text="Sản phẩm"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="7dp"
-                android:fontFamily="@font/baloo2_semibold"
-                />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/sanpham_recycler"
-                android:padding="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                />
+          <LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="15dp"
+              android:padding="5dp"
+              android:background="@drawable/edit_txt"
+              android:backgroundTint="@color/white"
+              android:orientation="vertical">
+              <TextView
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textColor="@color/black"
+                  android:textSize="25dp"
+                  android:text="Sản phẩm"
+                  android:layout_marginStart="5dp"
+                  android:layout_marginTop="7dp"
+                  android:fontFamily="@font/font_item_text"
+                  />
+              <androidx.recyclerview.widget.RecyclerView
+                  android:id="@+id/sanpham_recycler"
+                  android:padding="5dp"
+                  android:layout_marginEnd="5dp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  />
+          </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

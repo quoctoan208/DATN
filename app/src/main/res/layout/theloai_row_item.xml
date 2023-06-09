@@ -14,10 +14,9 @@
         android:paddingEnd="18dp"
         android:paddingBottom="12dp"
         android:background="@drawable/bogoc_itemview"
-        android:backgroundTint="@color/Button"
         android:text="Thể loại"
         android:textColor="@color/text"
-        android:fontFamily="@font/baloo2_semibold"
+        android:fontFamily="@font/playfair_9pt_semiexpanded_light"
         android:textSize="17dp"
         android:textStyle="bold" />
 </LinearLayout>

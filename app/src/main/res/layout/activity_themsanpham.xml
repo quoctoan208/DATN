@@ -14,7 +14,8 @@
         android:text="Đăng Sản Phẩm"
         android:gravity="center"
         android:background="@color/text"
-        android:textSize="20dp"
+        android:textSize="25dp"
+        android:fontFamily="@font/baloo2_semibold"
         android:textStyle="bold"
         android:textColor="@color/white"/>
 
@@ -39,12 +40,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/baloo2_semibold"
+                    android:layout_marginStart="5dp"
+                    android:fontFamily="@font/playfair_pt_black"
                     android:text="Thể Loại:"
-                    android:textColor="@color/text"
+                    android:textColor="#686464"
                     android:textSize="17dp" />
 
                 <Spinner
@@ -61,12 +61,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/baloo2_semibold"
                 android:text="Ảnh sản phẩm:"
-                android:textColor="@color/text"
+                android:textColor="#686464"
                 android:textSize="17dp" />
 
 
@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/Button"
                 android:layout_marginTop="3dp"
+                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                 android:layout_gravity="center"
                 android:text="Thêm Ảnh"/>
 
@@ -124,6 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:text="Mã Sản Phẩm:"
                 />
             <EditText
@@ -141,6 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:text="Tên Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_tensp"
@@ -157,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:text="Số Lượng Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_soluongsp"
@@ -173,6 +177,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:text="Giá Bán Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_giabansp"
@@ -189,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
+                android:fontFamily="@font/playfair_pt_black"
                 android:text="Mô tả chi tiết sản phẩm ( Ít hơn 200 ký tự ):"/>
             <EditText
                 android:id="@+id/edt_add_motasp"
@@ -208,7 +214,7 @@
                 android:layout_gravity="center"
                 android:backgroundTint="@color/Button"
                 android:drawableRight="@drawable/ic_cart"
-                android:fontFamily="@font/baloo2_semibold"
+                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                 android:text="Đăng Sản Phẩm"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />

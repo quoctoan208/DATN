@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:layout_marginBottom="50dp"
     android:layout_height="match_parent"
     tools:context=".Fragment.GioHangFragment">
 
@@ -27,11 +28,9 @@
                     android:layout_width="40dp"
                     android:layout_height="35dp"
                     android:layout_marginStart="10dp"
-                    android:background="@drawable/bogoc_itemview"
-                    android:backgroundTint="@color/white"
+                    android:background="@drawable/edit_txt"
                     android:layout_marginTop="5dp"
                     android:src="@drawable/ic_left"
-                    android:padding="10dp"
                     />
                 <TextView
                     android:layout_width="match_parent"
@@ -39,7 +38,9 @@
                     android:layout_weight="1"
                     android:text="Giỏ hàng"
                     android:gravity="center"
-                    android:fontFamily="@font/baloo2_semibold"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="30dp"
+                    android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                     android:textColor="@color/white"
                     android:textSize="30dp" />
 
@@ -107,10 +108,11 @@
                     android:background="@drawable/edit_txt"
                     android:backgroundTint="@color/text"
                     android:text="MUA HÀNG"
+                    android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
                     android:textAllCaps="false"
                     android:layout_marginBottom="50dp"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="25dp" />
 
             </LinearLayout>
 

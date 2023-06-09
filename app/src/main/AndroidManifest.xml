@@ -22,6 +22,12 @@
             android:name=".GUI.DonHangActivity"
             android:exported="false" />
         <activity
+            android:name=".GUI.DonHangBanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GUI.ChiTietDonHangActivity"
+            android:exported="false" />
+        <activity
             android:name=".GUI.ChiTietSP_Activity"
             android:exported="false" />
         <activity
@@ -31,15 +37,25 @@
         <activity android:name=".GUI.ThemSanPham"
             android:exported="false"/>
 
+        <activity android:name=".GUI.TaiKhoanActivity"
+        android:exported="false"/>
+
+        <activity android:name=".GUI.ProfNguoiBanActivity"
+            android:exported="false"/>
+
         <activity android:name=".GUI.NhanTinActivity"
             android:exported="false"/>
 
         <activity android:name=".Momo.ThanhToanMomoActivity"
             android:exported="false"/>
 
+        <activity android:name=".GUI.SuaSanPham"
+            android:exported="false"/>
 
+        <activity android:name=".Fragment.MainActivity"
+            android:exported="false"/>
         <activity
-            android:name=".Fragment.MainActivity"
+            android:name=".GUI.DangNhap_Activity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
