@@ -10,8 +10,8 @@
 
         <item
             android:id="@+id/shorts"
-            android:title="Shorts"
-            android:icon="@drawable/ic_cart"
+            android:title="Sản Phẩm"
+            android:icon="@drawable/baseline_propane_tank_24"
             />
 
         <item
@@ -19,7 +19,7 @@
 
         <item
             android:id="@+id/subscriptions"
-            android:title="Subscriptions"
+            android:title="Giỏ Hàng"
             android:icon="@drawable/ic_cart" />
         <item
             android:id="@+id/library"

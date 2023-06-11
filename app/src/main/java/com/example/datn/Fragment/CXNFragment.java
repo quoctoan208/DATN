@@ -90,6 +90,7 @@ public class CXNFragment extends Fragment {
                     linearLayout.setVisibility(View.GONE);
                 }
                 else {
+                    linearLayout.setVisibility(View.VISIBLE);
                     Log.e("DITME", "Response error: " + response.code() + " - " + response.message());
                     Toast.makeText(donHangActivity, "Không có đơn hàng", Toast.LENGTH_SHORT).show();
                 }

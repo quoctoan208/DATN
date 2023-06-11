@@ -36,7 +36,7 @@ import retrofit2.http.Query;
 public interface APIService {
 
     Gson gson = new GsonBuilder().setLenient().setDateFormat("dd/MM/yyyy").create();
-    APIService apiService = new Retrofit.Builder().baseUrl("https://lastmintglass27.conveyor.cloud/")
+    APIService apiService = new Retrofit.Builder().baseUrl("https://greatshinyski32.conveyor.cloud/")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -119,8 +119,11 @@ public interface APIService {
     @GET("api/tbl_THELOAI")
     Call<List<TheLoai>> getTheLoai();
 
-    @GET("api/tbl_GIOHANG/{masv}")
-    Call<List<GioHang>> Getgiohang(@Path("masv") int maSV);
+    @GET("api/tbl_GIOHANG/Gettbl_GIOHANGbyMaSV/{maSV}")
+    Call<List<GioHang>> Getgiohang(@Path("maSV") int maSV);
+
+    @GET("api/tbl_GIOHANG/Gettbl_GIOHANGbyMaSP/{maSV}/{maSP}")
+    Call<List<GioHang>> GetgiohangbyMaSP(@Path("maSV") int maSV,@Path("maSP") String maSP);
 
     @POST("api/tbl_GIOHANG")
     Call<List<GioHang>> PostGIOHANG(@Body GioHang GioHang);

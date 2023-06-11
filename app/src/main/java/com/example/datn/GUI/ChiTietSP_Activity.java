@@ -85,7 +85,6 @@ public class ChiTietSP_Activity extends AppCompatActivity {
         long a = (long) tongtien;
         int b = (int) a; // ép kiểu in
         GioHang gioHang = new GioHang(0, maSV, MASP, 1, b);
-
         APIService.apiService.PostGIOHANG(gioHang).enqueue(new Callback<List<GioHang>>() {
             @Override
             public void onResponse(Call<List<GioHang>> call, Response<List<GioHang>> response) {
@@ -123,7 +122,6 @@ public class ChiTietSP_Activity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<GioHang>> call, Throwable t) {
                 SuKien.dismissDialog();
-                Toast.makeText(ChiTietSP_Activity.this, "Không thêm được giỏ hàng", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.datn.GUI.DangNhap_Activity;
 import com.example.datn.GUI.DonHangActivity;
 import com.example.datn.GUI.DonHangBanActivity;
 import com.example.datn.GUI.TaiKhoanActivity;
@@ -22,7 +23,7 @@ import com.example.datn.R;
 public class TaiKhoanFragment extends Fragment {
 
     TextView hoten;
-    Button donhang, donhangban , thietlaptaikhoan;
+    Button donhang, donhangban , thietlaptaikhoan, btnLogout;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,7 +38,7 @@ public class TaiKhoanFragment extends Fragment {
     }
 
     private void getData() {
-        hoten.setText(taikhoancuatoi.getHoVaTen());
+        hoten.setText(taikhoancuatoi.getHoVaTen()+"");
     }
 
     private void onclick() {
@@ -61,6 +62,14 @@ public class TaiKhoanFragment extends Fragment {
                 startActivity(new Intent(getContext(), TaiKhoanActivity.class));
             }
         });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), DangNhap_Activity.class));
+                getActivity().finish();
+            }
+        });
     }
 
     private void anhxa(View view) {
@@ -68,5 +77,6 @@ public class TaiKhoanFragment extends Fragment {
         donhangban = view.findViewById(R.id.btndonban);
         thietlaptaikhoan = view.findViewById(R.id.btnEditUser);
         hoten = view.findViewById(R.id.tv_hoTentaikhoan);
+        btnLogout = view.findViewById(R.id.btnLogout);
     }
 }

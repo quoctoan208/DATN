@@ -1,6 +1,7 @@
 package com.example.datn.GUI;
 
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
+import static com.example.datn.GUI.DangNhap_Activity.taikhoancuatoi;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -23,8 +24,6 @@ public class TaiKhoanActivity extends AppCompatActivity {
     TextView hoTen, hoTen2, masv, maLop, sDT, diaChi;
     Button btnSuaTk;
 
-    public static TaiKhoan taiKhoan ;
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thongtincuatoi);
@@ -37,27 +36,17 @@ public class TaiKhoanActivity extends AppCompatActivity {
     }
 
     private void getDataUser() {
-        APIService.apiService.GetTaikhoan(maSV).enqueue(new Callback<TaiKhoan>() {
-            @Override
-            public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
-                taiKhoan = response.body();
-                hoTen.setText(response.body().getHoVaTen());
-                hoTen2.setText(response.body().getHoVaTen());
-                masv.setText(""+response.body().getMaSV());
-                maLop.setText(""+response.body().getMaLop());
-                sDT.setText("0"+response.body().getsDT());
-                diaChi.setText(response.body().getDiaChi());
-            }
 
-            @Override
-            public void onFailure(Call<TaiKhoan> call, Throwable t) {
+        hoTen.setText(taikhoancuatoi.getHoVaTen());
+        hoTen2.setText(taikhoancuatoi.getHoVaTen());
+        masv.setText(""+taikhoancuatoi.getMaSV());
+        maLop.setText(""+taikhoancuatoi.getMaLop());
+        sDT.setText("0"+taikhoancuatoi.getsDT());
+        diaChi.setText(taikhoancuatoi.getDiaChi());
 
-            }
-        });
     }
 
     private void anhxa() {
-        taiKhoan = new TaiKhoan();
         btnSuaTk = findViewById(R.id.btn_suataikhoan);
         hoTen = findViewById(R.id.tv_hoten_tk);
         hoTen2 = findViewById(R.id.tv_hoten2_tk);

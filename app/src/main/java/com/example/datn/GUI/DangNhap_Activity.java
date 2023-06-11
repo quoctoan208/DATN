@@ -24,11 +24,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class DangNhap_Activity extends AppCompatActivity {
-    private EditText txt_masvdangnhap,txt_password;
+    private EditText txt_masvdangnhap, txt_password;
 
-    public  static TaiKhoan taikhoancuatoi;
+    public static TaiKhoan taikhoancuatoi;
     private Button btn_login;
-    public static int maSV ,MALOP = 101181;//10118369
+    public static int maSV, MALOP = 101181;//10118369
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class DangNhap_Activity extends AppCompatActivity {
         onclick();
 
     }
+
     private void onclick() {
 
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -49,44 +51,43 @@ public class DangNhap_Activity extends AppCompatActivity {
     }
 
     private void Dangnhap() {
-        int masv=Integer.parseInt(txt_masvdangnhap.getText().toString());
-        String password=txt_password.getText().toString();
-        if (password == ""){
+        int masv = Integer.parseInt(txt_masvdangnhap.getText().toString());
+        String password = txt_password.getText().toString();
+        if (password == "") {
             SuKien.dismissDialog();
             Toast.makeText(this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
-        }else {
-            SuKien.showDialog(DangNhap_Activity.this);
-            APIService.apiService.Kiemtra(masv,password).enqueue(new Callback<String>() {
+        } else {
+            APIService.apiService.Kiemtra(masv, password).enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()){
-                            maSV =masv;
-                            APIService.apiService.GetTaikhoan(masv).enqueue(new Callback<TaiKhoan>() {
-                                @Override
-                                public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
-                                    if (response.isSuccessful()){
-                                        taikhoancuatoi = response.body();
-                                    }
+                    if (response.isSuccessful()) {
+                        maSV = masv;
+                        APIService.apiService.GetTaikhoan(masv).enqueue(new Callback<TaiKhoan>() {
+                            @Override
+                            public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
+                                if (response.isSuccessful()) {
+                                    taikhoancuatoi = response.body();
                                 }
+                            }
 
-                                @Override
-                                public void onFailure(Call<TaiKhoan> call, Throwable t) {
-                                    Toast.makeText(DangNhap_Activity.this, "không lấy đợc dữ liệu tài khoản", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            Toast.makeText(DangNhap_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
-                            SuKien.dismissDialog();
-                            startActivity(new Intent(DangNhap_Activity.this, MainActivity.class));
-                    }else {
+                            @Override
+                            public void onFailure(Call<TaiKhoan> call, Throwable t) {
+                                SuKien.dismissDialog();
+                                Toast.makeText(DangNhap_Activity.this, "không lấy đợc dữ liệu tài khoản", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                        Toast.makeText(DangNhap_Activity.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        SuKien.dismissDialog();
+                        startActivity(new Intent(DangNhap_Activity.this, MainActivity.class));
+                    } else {
                         SuKien.dismissDialog();
                         Toast.makeText(DangNhap_Activity.this, "Tài khoản không tồn tại", Toast.LENGTH_SHORT).show();
-                    }
+                    }SuKien.dismissDialog();
                 }
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
                     Toast.makeText(DangNhap_Activity.this, "out", Toast.LENGTH_SHORT).show();
-
                     SuKien.dismissDialog();
                 }
             });
@@ -95,9 +96,9 @@ public class DangNhap_Activity extends AppCompatActivity {
 
 
     private void anhxa() {
-        taikhoancuatoi= new TaiKhoan();
-        txt_masvdangnhap =findViewById(R.id.txt_email);
-        txt_password=findViewById(R.id.txt_password);
-        btn_login=findViewById(R.id.btn_login);
+        taikhoancuatoi = new TaiKhoan();
+        txt_masvdangnhap = findViewById(R.id.txt_email);
+        txt_password = findViewById(R.id.txt_password);
+        btn_login = findViewById(R.id.btn_login);
     }
 }

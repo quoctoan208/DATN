@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     >
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
@@ -17,14 +18,14 @@
 
 
         <ImageButton
-            android:id="@+id/igb_backAccount"
+            android:id="@+id/imgbtn_phone"
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="25dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:src="@drawable/cross"
+            android:src="@drawable/phone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -73,26 +74,41 @@
             android:id="@+id/tv_msvien"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="234dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="154dp"
+            android:layout_marginBottom="20dp"
             android:text="mã sinh viên"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="13sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toEndOf="@+id/tv_danhgia" />
+
+        <TextView
+            android:id="@+id/tv_malop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="175dp"
+            android:layout_marginBottom="7dp"
+            android:text="mã lớp"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_msvien"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_userFullName" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="19dp"
+            android:layout_marginBottom="20dp"
             android:drawableStart="@drawable/rating"
             android:gravity="center"
             android:textAllCaps="false"
@@ -101,7 +117,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_msvien" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_userFullName" />
 
         <TextView
             android:id="@+id/tv_danhgia"

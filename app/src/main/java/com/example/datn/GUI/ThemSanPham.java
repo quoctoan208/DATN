@@ -53,9 +53,8 @@ public class ThemSanPham extends Activity {
     public static List<AnhSP> anhSPList;
     private static final int REQUEST_SELECT_IMAGES = 1;
     private SanPham sanPham;
+    String mMasp,mAnh1,mAnh2,mAnh3,mAnh4,mAnh5;
     static AnhSP anhSP ;
-    String mAnh1;
-
     String maTL;
 
     @Override
@@ -70,7 +69,6 @@ public class ThemSanPham extends Activity {
 
     private void setUp() {
         anhSPList = new ArrayList<>();
-        anhSP = new AnhSP();
 
         //Load spiner
         spinnerAdapter = new SpinnerAdapter(this, R.layout.item_select_spiner, getlistTheLoai());
@@ -162,7 +160,7 @@ public class ThemSanPham extends Activity {
 
         // Tham chiếu đến Firebase Storage
         final StorageReference storageRef = FirebaseStorage.getInstance().getReference()
-                .child(""+anhSP.getMaSP()).child(imageName);
+                .child(""+mMasp).child(imageName);
 
         // Tạo task để upload ảnh lên Firebase Storage
         UploadTask uploadTask = storageRef.putFile(imageUri);
@@ -178,25 +176,25 @@ public class ThemSanPham extends Activity {
                         // Thay đổi trường tương ứng trong đối tượng AnhSP dựa trên số thứ tự của ảnh
                         switch (imageCount) {
                             case 0:
-                                anhSP.setAnh1(downloadUri.toString());
-                                mAnh1 = anhSP.getAnh1();
+                                mAnh1 = downloadUri.toString();
                                 break;
                             case 1:
-                                anhSP.setAnh2(downloadUri.toString());
+                                mAnh2= downloadUri.toString();
                                 break;
                             case 2:
-                                anhSP.setAnh3(downloadUri.toString());
+                                mAnh3= downloadUri.toString();
                                 break;
                             case 3:
-                                anhSP.setAnh4(downloadUri.toString());
+                                mAnh4= downloadUri.toString();
                                 break;
                             case 4:
-                                anhSP.setAnh5(downloadUri.toString());
+                                mAnh5= downloadUri.toString();
                                 break;
                         }
 
                         // Nếu đã upload hết ảnh, cập nhật đối tượng AnhSP lên Realtime Database
                         if (imageCount == 4) {
+                            anhSP = new AnhSP(mMasp, mAnh1, mAnh2, mAnh3, mAnh4, mAnh5);
                             Toast.makeText(ThemSanPham.this, " Có "+ imageCount +" ảnh SP", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -212,7 +210,7 @@ public class ThemSanPham extends Activity {
     }
 
     public void addsanphamAPI() {
-        String mMaSP = edt_masp.getText().toString();
+        mMasp = edt_masp.getText().toString();
         String mTenSP = edt_tensp.getText().toString();
         int mSoLuong = Integer.parseInt(edt_soluong.getText().toString());
         float mDonGia = Float.parseFloat(edt_dongia.getText().toString());
@@ -221,12 +219,11 @@ public class ThemSanPham extends Activity {
         int mXetDuyet = 1;// chưa xác nhận
 
         //Thêm ảnh sản phẩm lên firebase
-        anhSP.setMaSP(mMaSP);
         for (int i = 0; i < imgUri.size(); i++) {
             Uri imageUri = imgUri.get(i);
             addAnhSPFireBase( i, imageUri);
         }
-        sanPham = new SanPham(mMaSP, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
+        sanPham = new SanPham(mMasp, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
 
         //thêm dữ liệu vào dbSanpham
         APIService.apiService.PostSANPHAM(sanPham).enqueue(new Callback<Integer>() {
@@ -270,7 +267,6 @@ public class ThemSanPham extends Activity {
         edt_motasp = findViewById(R.id.edt_add_motasp);
         btn_addSanPham = findViewById(R.id.btn_addsanpham);
         themanh = findViewById(R.id.btn_themanhsp);
-        anhSP = new AnhSP();
         imageViews = new ArrayList<>();
         imageViews.add(findViewById(R.id.add_imgAnhSP1));
         imageViews.add(findViewById(R.id.add_imgAnhSP2));

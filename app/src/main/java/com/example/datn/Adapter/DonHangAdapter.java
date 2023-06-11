@@ -13,6 +13,7 @@ import static com.example.datn.Fragment.DangGFragment.setUpViewDangG;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,7 +84,7 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
         holder.txt_thoigian.setText("Ngày giao dịch: "+donHang.getNgayGiaoDich());
         switch (donHang.getTrangThaiDH()) {
             case 0:
-                holder.txt_trangthaidonmua.setText("Đơn hàng đang chờ xác nhận.");
+                holder.txt_trangthaidonmua.setText("Đơn hàng đang chờ được xác nhận.");
                 holder.button.setText("Hủy đơn hàng");
                 huydon(donHang, holder);
                 break;
@@ -92,17 +93,19 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
                 holder.button.setVisibility(View.GONE);
                 break;
             case 2:
-                holder.txt_trangthaidonmua.setText("Đơn vị vận chuyển đã nhận hàng từ người bán.");
+                holder.txt_trangthaidonmua.setText("Đơn vị vận chuyển đã nhận hàng từ người bán. Hãy xác nhận khi bạn đã KIỂM TRA HÀNG và NHẬN HÀNG thành công!");
                 holder.button.setText("Đã nhận hàng");
                 danhanhang(donHang, holder);
                 break;
             case 3:
                 holder.txt_trangthaidonmua.setText("Đơn hàng đã được giao thành công.");
+                holder.button.setBackgroundColor(Color.RED);
                 holder.button.setText("Mua lại sản phẩm");
                 //mualai(holder, donHang);
                 break;
             case 4:
                 holder.txt_trangthaidonmua.setText("Đơn hàng đã bị hủy.");
+                holder.button.setBackgroundColor(Color.RED);
                 holder.button.setText("Mua lại sản phẩm");
                 //mualai(holder, donHang);
                 break;
@@ -131,8 +134,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
                                     public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                                         setUpViewCXN();
                                         getdata_CXN();
-                                        setUpViewDaH();
-                                        getdataDaH();
                                     }
 
                                     @Override
@@ -173,8 +174,6 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
                                     public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                                         setUpViewDangG();
                                         getdataDangG();
-                                        setUpViewDaG();
-                                        getdataDaG();
                                     }
 
                                     @Override

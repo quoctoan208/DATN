@@ -93,6 +93,7 @@ public class DonbanCXNFragment extends Fragment {
                 else {
                     Log.e("CHECK", "Response error: " + response.code() + " - " + response.message());
                     Toast.makeText(donHangBanActivity.getApplication(), "Không có đơn hàng", Toast.LENGTH_SHORT).show();
+                    linearLayout.setVisibility(View.VISIBLE);
                 }
             }
 

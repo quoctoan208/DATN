@@ -93,7 +93,7 @@ public class DonHangDaBanAdapter extends RecyclerView.Adapter<DonHangDaBanAdapte
                 break;
             case 1: // đơn hàng đang được soạn để gửi đi
                 holder.btn_xacnhandonban.setText("Xác nhận gửi hàng");
-                holder.txt_tinhtrangdonban.setText("Trạng thái: Đơn hàng đang chờ gửi cho nhà vận chuyển.");
+                holder.txt_tinhtrangdonban.setText("Trạng thái: Đơn hàng đang chờ gửi cho nhà vận chuyển. Hãy xác nhận khi ĐƠN VỊ VẬN CHUYỂN đã nhận đơn hàng.");
                 holder.buttonhuydonban.setVisibility(View.GONE);
                 xacnhanguihang(donHang,holder);
                 break;
@@ -140,8 +140,6 @@ public class DonHangDaBanAdapter extends RecyclerView.Adapter<DonHangDaBanAdapte
                                     public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                                         setUpViewCNXBAN();
                                         getdata_CXNDONBAN();
-                                        setUpViewDonHuyBAN();
-                                        getdataDonHuyBAN();
                                         SuKien.dismissDialog();
                                     }
 
@@ -181,8 +179,6 @@ public class DonHangDaBanAdapter extends RecyclerView.Adapter<DonHangDaBanAdapte
                                     public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
                                         setUpViewCNXBAN();
                                         getdata_CXNDONBAN();
-                                        setUpViewChoGiao();
-                                        getdataCHOGIAOHANG();
                                         SuKien.dismissDialog();
                                     }
 
@@ -224,8 +220,6 @@ public class DonHangDaBanAdapter extends RecyclerView.Adapter<DonHangDaBanAdapte
                                 APIService.apiService.PutDONHANG(donHang.getMaDH(), donHang1).enqueue(new Callback<List<DonHang>>() {
                                     @Override
                                     public void onResponse(Call<List<DonHang>> call, Response<List<DonHang>> response) {
-                                        setUpViewDaGBan();
-                                        getdataDaGBan();
                                         setUpViewChoGiao();
                                         getdataCHOGIAOHANG();
                                         SuKien.dismissDialog();
@@ -246,68 +240,68 @@ public class DonHangDaBanAdapter extends RecyclerView.Adapter<DonHangDaBanAdapte
         });
 
         //Xác nhận gửi đơn hàng - Kiểm tra số lượng sản phẩm và xóa sản phẩm
-        APIService.apiService.getChiTietDonHang(donHang1.getMaDH()).enqueue(new Callback<List<ChiTietDonHang>>() {
-            @Override
-            public void onResponse(Call<List<ChiTietDonHang>> call, Response<List<ChiTietDonHang>> response) {
-                if (response.isSuccessful()){
-                    for (ChiTietDonHang chiTietDonHang : response.body()){
-                        APIService.apiService.GetSANPHAM(chiTietDonHang.getMaSP()).enqueue(new Callback<SanPham>() {
-                            @Override
-                            public void onResponse(Call<SanPham> call, Response<SanPham> response) {
-                                if (response.body().getSoLuong() == 1){
-                                    //nếu số sl sản phẩm = 1 thì xóa sản phẩm
-                                    APIService.apiService.DeleteSPbyID(response.body().getMaSP()).enqueue(new Callback<SanPham>() {
-                                        @Override
-                                        public void onResponse(Call<SanPham> call, Response<SanPham> response) {
-                                            if(response.isSuccessful()){
-                                                Toast.makeText(activity, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
-                                            }
-                                            else {
-                                                Toast.makeText(activity, "Không tìm được sản phẩm để xóa", Toast.LENGTH_SHORT).show();
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<SanPham> call, Throwable t) {
-                                            Log.d("TAG xoa SP", "onFailure: "+t.getMessage());
-                                        }
-                                    });
-                                }
-                                else {
-                                    //Nếu sp có sl >1 thì trừ đi 1
-                                    int soluong = response.body().getSoLuong()-1;
-                                    Toast.makeText(activity, "Số lượng SP còn lại: "+soluong, Toast.LENGTH_SHORT).show();
-                                    SanPham sanPham = new SanPham(response.body().getMaSP(),response.body().getMaTL(), response.body().getTenSP(),
-                                            response.body().getAnhSP(), response.body().getDonGia(),soluong,response.body().getMatoSP()
-                                            ,response.body().getXetDuyet(),response.body().getMaSV());
-                                    APIService.apiService.putSANPHAM(response.body().getMaSP(),sanPham).enqueue(new Callback<SanPham>() {
-                                        @Override
-                                        public void onResponse(Call<SanPham> call, Response<SanPham> response) {
-                                            Toast.makeText(activity, "Đã cập nhật số lượng sản phẩm của bạn", Toast.LENGTH_SHORT).show();
-                                        }
-
-                                        @Override
-                                        public void onFailure(Call<SanPham> call, Throwable t) {
-                                            Toast.makeText(activity, "Lỗi! Không thể cập nhật số lượng sản phẩm", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<SanPham> call, Throwable t) {
-                                Toast.makeText(activity, "Không tìm được sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ChiTietDonHang>> call, Throwable t) {
-                Toast.makeText(activity, "Không tìm được CTDH từ Đơn Hàng!", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        APIService.apiService.getChiTietDonHang(donHang1.getMaDH()).enqueue(new Callback<List<ChiTietDonHang>>() {
+//            @Override
+//            public void onResponse(Call<List<ChiTietDonHang>> call, Response<List<ChiTietDonHang>> response) {
+//                if (response.isSuccessful()){
+//                    for (ChiTietDonHang chiTietDonHang : response.body()){
+//                        APIService.apiService.GetSANPHAM(chiTietDonHang.getMaSP()).enqueue(new Callback<SanPham>() {
+//                            @Override
+//                            public void onResponse(Call<SanPham> call, Response<SanPham> response) {
+//                                if (response.body().getSoLuong() == 1){
+//                                    //nếu số sl sản phẩm = 1 thì xóa sản phẩm
+//                                    APIService.apiService.DeleteSPbyID(response.body().getMaSP()).enqueue(new Callback<SanPham>() {
+//                                        @Override
+//                                        public void onResponse(Call<SanPham> call, Response<SanPham> response) {
+//                                            if(response.isSuccessful()){
+//                                                Toast.makeText(activity, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                            else {
+//                                                Toast.makeText(activity, "Không tìm được sản phẩm để xóa", Toast.LENGTH_SHORT).show();
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onFailure(Call<SanPham> call, Throwable t) {
+//                                            Log.d("TAG xoa SP", "onFailure: "+t.getMessage());
+//                                        }
+//                                    });
+//                                }
+//                                else {
+//                                    //Nếu sp có sl >1 thì trừ đi 1
+//                                    int soluong = response.body().getSoLuong()-1;
+//                                    Toast.makeText(activity, "Số lượng SP còn lại: "+soluong, Toast.LENGTH_SHORT).show();
+//                                    SanPham sanPham = new SanPham(response.body().getMaSP(),response.body().getMaTL(), response.body().getTenSP(),
+//                                            response.body().getAnhSP(), response.body().getDonGia(),soluong,response.body().getMatoSP()
+//                                            ,response.body().getXetDuyet(),response.body().getMaSV());
+//                                    APIService.apiService.putSANPHAM(response.body().getMaSP(),sanPham).enqueue(new Callback<SanPham>() {
+//                                        @Override
+//                                        public void onResponse(Call<SanPham> call, Response<SanPham> response) {
+//                                            Toast.makeText(activity, "Đã cập nhật số lượng sản phẩm của bạn", Toast.LENGTH_SHORT).show();
+//                                        }
+//
+//                                        @Override
+//                                        public void onFailure(Call<SanPham> call, Throwable t) {
+//                                            Toast.makeText(activity, "Lỗi! Không thể cập nhật số lượng sản phẩm", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                    });
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<SanPham> call, Throwable t) {
+//                                Toast.makeText(activity, "Không tìm được sản phẩm trong giỏ hàng", Toast.LENGTH_SHORT).show();
+//                            }
+//                        });
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<ChiTietDonHang>> call, Throwable t) {
+//                Toast.makeText(activity, "Không tìm được CTDH từ Đơn Hàng!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
     }
 
