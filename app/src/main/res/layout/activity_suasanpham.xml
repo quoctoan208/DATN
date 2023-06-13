@@ -9,27 +9,26 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:background="@color/text"
         android:gravity="center"
         android:text="Sửa Thông Tin Sản Phẩm"
         android:textColor="@color/white"
-        android:textSize="20dp"
+        android:textSize="24dp"
         android:textStyle="bold" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:background="#F8F3F3"
+        android:background="@color/white"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
         android:layout_weight="1"
         android:fillViewport="true"
-        android:padding="10dp">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#F8F3F3"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <LinearLayout
@@ -133,13 +132,13 @@
             <EditText
                 android:id="@+id/edt_sua_tensp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
-                android:paddingStart="8dp"
+                android:paddingStart="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:textColor="@color/text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/Edt_text"
-                android:textSize="25dp" />
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -152,13 +151,13 @@
             <EditText
                 android:id="@+id/edt_sua_soluongsp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
-                android:paddingStart="8dp"
+                android:paddingStart="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:textColor="@color/text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/Edt_text"
-                android:textSize="25dp" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -171,13 +170,13 @@
             <EditText
                 android:id="@+id/edt_sua_giabansp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginTop="5dp"
-                android:paddingStart="8dp"
+                android:paddingStart="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:textColor="@color/text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/Edt_text"
-                android:textSize="25dp" />
+                 />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,11 +191,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:paddingStart="8dp"
+                android:paddingStart="20dp"
                 android:background="@drawable/bogoc_itemview"
-                android:textColor="@color/text"
+                android:textColor="@color/black"
                 android:textColorHint="@color/Edt_text"
-                android:textSize="25dp" />
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -206,11 +205,11 @@
                 <android.widget.Button
                     android:id="@+id/btn_submitsuasanpham"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_marginTop="15dp"
                     android:paddingEnd="19dp"
                     android:background="@drawable/edit_txt"
-                    android:backgroundTint="@color/teal_700"
+                    android:backgroundTint="@color/Button"
                     android:drawableRight="@drawable/ic_cart"
                     android:fontFamily="@font/baloo2_semibold"
                     android:gravity="center"
@@ -221,8 +220,8 @@
                 <android.widget.Button
                     android:id="@+id/btn_xoasanpham"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="7dp"
                     android:paddingEnd="15dp"
                     android:background="@drawable/edit_txt"
                     android:backgroundTint="#ED2F2F"
@@ -236,11 +235,12 @@
                 <android.widget.Button
                     android:id="@+id/btn_cancesuasanpham"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:paddingEnd="19dp"
                     android:background="@drawable/edit_txt"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="40dp"
                     android:backgroundTint="#919598"
                     android:drawableRight="@drawable/baseline_navigate_next_24"
                     android:fontFamily="@font/baloo2_semibold"

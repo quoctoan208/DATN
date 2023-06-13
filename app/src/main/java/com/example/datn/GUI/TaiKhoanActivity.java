@@ -3,8 +3,10 @@ package com.example.datn.GUI;
 import static com.example.datn.GUI.DangNhap_Activity.maSV;
 import static com.example.datn.GUI.DangNhap_Activity.taikhoancuatoi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +23,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class TaiKhoanActivity extends AppCompatActivity {
-    TextView hoTen, hoTen2, masv, maLop, sDT, diaChi;
+    static TextView hoTen, hoTen2, masv, maLop, sDT, diaChi;
     Button btnSuaTk;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,16 @@ public class TaiKhoanActivity extends AppCompatActivity {
     }
 
     private void onclick() {
+        btnSuaTk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TaiKhoanActivity.this, SuaTaiKhoan.class));
+            }
+        });
+
     }
 
-    private void getDataUser() {
+    public static void getDataUser() {
 
         hoTen.setText(taikhoancuatoi.getHoVaTen());
         hoTen2.setText(taikhoancuatoi.getHoVaTen());

@@ -22,6 +22,7 @@ import androidx.annotation.Nullable;
 
 import com.example.datn.Adapter.SpinnerAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.Fragment.MainActivity;
 import com.example.datn.Model.AnhSP;
 import com.example.datn.Model.SanPham;
@@ -53,8 +54,8 @@ public class ThemSanPham extends Activity {
     public static List<AnhSP> anhSPList;
     private static final int REQUEST_SELECT_IMAGES = 1;
     private SanPham sanPham;
-    String mMasp,mAnh1,mAnh2,mAnh3,mAnh4,mAnh5;
-    static AnhSP anhSP ;
+    public static String mMasp,mAnh1,mAnh2,mAnh3,mAnh4,mAnh5;
+    public static AnhSP anhSP ;
     String maTL;
 
     @Override
@@ -132,6 +133,11 @@ public class ThemSanPham extends Activity {
                     ImageView imageView = imageViews.get(i);
                     imageView.setVisibility(View.GONE);
                 }
+                //Thêm ảnh sản phẩm lên firebase
+                for (int i = 0; i < imgUri.size(); i++) {
+                    Uri imageUri = imgUri.get(i);
+                    addAnhSPFireBase( i, imageUri);
+                }
             } else {
                 //Lấy uri từ ảnh được chọn
                 Uri imageUri = data.getData();
@@ -160,7 +166,7 @@ public class ThemSanPham extends Activity {
 
         // Tham chiếu đến Firebase Storage
         final StorageReference storageRef = FirebaseStorage.getInstance().getReference()
-                .child(""+mMasp).child(imageName);
+                .child(imageName);
 
         // Tạo task để upload ảnh lên Firebase Storage
         UploadTask uploadTask = storageRef.putFile(imageUri);
@@ -176,27 +182,27 @@ public class ThemSanPham extends Activity {
                         // Thay đổi trường tương ứng trong đối tượng AnhSP dựa trên số thứ tự của ảnh
                         switch (imageCount) {
                             case 0:
+                                Log.d("TAG", "Hiển thị hình ảnh: "+mAnh1);
                                 mAnh1 = downloadUri.toString();
                                 break;
                             case 1:
+                                Log.d("TAG", "Hiển thị hình ảnh: "+mAnh1);
                                 mAnh2= downloadUri.toString();
                                 break;
                             case 2:
+                                Log.d("TAG", "Hiển thị hình ảnh: "+mAnh1);
                                 mAnh3= downloadUri.toString();
                                 break;
                             case 3:
+                                Log.d("TAG", "Hiển thị hình ảnh: "+mAnh1);
                                 mAnh4= downloadUri.toString();
                                 break;
                             case 4:
+                                Log.d("TAG", "Hiển thị hình ảnh: "+mAnh1);
                                 mAnh5= downloadUri.toString();
                                 break;
                         }
 
-                        // Nếu đã upload hết ảnh, cập nhật đối tượng AnhSP lên Realtime Database
-                        if (imageCount == 4) {
-                            anhSP = new AnhSP(mMasp, mAnh1, mAnh2, mAnh3, mAnh4, mAnh5);
-                            Toast.makeText(ThemSanPham.this, " Có "+ imageCount +" ảnh SP", Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
             }
@@ -210,6 +216,7 @@ public class ThemSanPham extends Activity {
     }
 
     public void addsanphamAPI() {
+        SuKien.showDialog(ThemSanPham.this);
         mMasp = edt_masp.getText().toString();
         String mTenSP = edt_tensp.getText().toString();
         int mSoLuong = Integer.parseInt(edt_soluong.getText().toString());
@@ -218,13 +225,8 @@ public class ThemSanPham extends Activity {
         int mMaSV = maSV;
         int mXetDuyet = 1;// chưa xác nhận
 
-        //Thêm ảnh sản phẩm lên firebase
-        for (int i = 0; i < imgUri.size(); i++) {
-            Uri imageUri = imgUri.get(i);
-            addAnhSPFireBase( i, imageUri);
-        }
         sanPham = new SanPham(mMasp, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
-
+        anhSP = new AnhSP(mMasp, mAnh1, mAnh2, mAnh3, mAnh4, mAnh5);
         //thêm dữ liệu vào dbSanpham
         APIService.apiService.PostSANPHAM(sanPham).enqueue(new Callback<Integer>() {
             @Override
@@ -236,23 +238,26 @@ public class ThemSanPham extends Activity {
 
             @Override
             public void onFailure(Call<Integer> call, Throwable t) {
+                SuKien.dismissDialog();
                 Toast.makeText(ThemSanPham.this, "Không thêm được sản phẩm", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void addAnhSPAPI(AnhSP anhSP1) {
-        APIService.apiService.PostANHSANPHAM(anhSP1).enqueue(new Callback<List<AnhSP>>() {//Thêm ảnh sản phẩm
+        APIService.apiService.PostANHSANPHAM(anhSP1).enqueue(new Callback<AnhSP>() {//Thêm ảnh sản phẩm
             @Override
-            public void onResponse(Call<List<AnhSP>> call, Response<List<AnhSP>> response) {
+            public void onResponse(Call<AnhSP> call, Response<AnhSP> response) {
                 if (response.isSuccessful()) {
+                    SuKien.dismissDialog();
                     Toast.makeText(ThemSanPham.this, "Thêm Ảnh thành công", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(ThemSanPham.this, MainActivity.class));
                     finish();
                 }
             }
             @Override
-            public void onFailure(Call<List<AnhSP>> call, Throwable t) {
+            public void onFailure(Call<AnhSP> call, Throwable t) {
+                SuKien.dismissDialog();
                 Toast.makeText(ThemSanPham.this, "Không thêm được ảnh lên API", Toast.LENGTH_SHORT).show();
             }
         });

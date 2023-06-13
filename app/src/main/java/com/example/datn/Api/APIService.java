@@ -36,7 +36,7 @@ import retrofit2.http.Query;
 public interface APIService {
 
     Gson gson = new GsonBuilder().setLenient().setDateFormat("dd/MM/yyyy").create();
-    APIService apiService = new Retrofit.Builder().baseUrl("https://greatshinyski32.conveyor.cloud/")
+    APIService apiService = new Retrofit.Builder().baseUrl("https://littlepurpletree48.conveyor.cloud/")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
@@ -81,9 +81,11 @@ public interface APIService {
     Call<TaiKhoan> PostNGUOIDUNG(@Body TaiKhoan taiKhoan);
     @GET("api/tbl_TAIKHOAN/{id}")
     Call<TaiKhoan> GetTaikhoan(@Path("id") int id);
-
     @GET("api/tbl_TAIKHOAN/KiemTra/{masv}/{matkhau}")
     Call<String> Kiemtra(@Path("masv") int masv, @Path("matkhau") String matkhau);
+    @PUT("api/tbl_TAIKHOAN/{id}")
+    Call<TaiKhoan> putTAIKHOAN(@Path("id") int id, @Body TaiKhoan taiKhoan);
+
 
 
     @GET("api/tbl_SANPHAM/Gettbl_SANPHAM_XETDUYET")
@@ -110,7 +112,7 @@ public interface APIService {
     @POST("api/tbl_SANPHAM")
     Call<Integer>PostSANPHAM(@Body SanPham sanPham);
     @POST("api/tbl_ANHSP")
-    Call<List<AnhSP>>PostANHSANPHAM(@Body AnhSP anhSP);
+    Call<AnhSP>PostANHSANPHAM(@Body AnhSP anhSP);
 
     @PUT("api/tbl_SANPHAM/{id}")
     Call<SanPham> putSANPHAM(@Path("id") String id, @Body SanPham sanPham);

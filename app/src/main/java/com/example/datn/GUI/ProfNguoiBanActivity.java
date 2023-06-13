@@ -2,18 +2,11 @@ package com.example.datn.GUI;
 
 import static com.example.datn.GUI.ChiTietSP_Activity.maSV_SP;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.datn.Adapter.SanPhamAdapter;
 import com.example.datn.Api.APIService;
 import com.example.datn.BUS.SuKien;
-import com.example.datn.Fragment.MainActivity;
+import static com.example.datn.Fragment.HomeFragment.MASP;
 import com.example.datn.Model.SanPham;
 import com.example.datn.Model.TaiKhoan;
 import com.example.datn.R;
@@ -39,14 +32,14 @@ import retrofit2.Response;
 public class ProfNguoiBanActivity extends AppCompatActivity {
 
     TextView txt_hoten, txt_masv, tv_malop;
-    ImageButton imgbtn_Phone;
+    ImageButton imgbtn_Phone, imgbtn_sendmess;
     static RecyclerView recyclerView;
 
     static List<SanPham> sanPhamList;
 
     static SanPhamAdapter sanPhamAdapter;
 
-    String sdt;
+    public static String sdt;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +65,25 @@ public class ProfNguoiBanActivity extends AppCompatActivity {
                 showBottomDialog();
             }
         });
+        imgbtn_sendmess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+                smsIntent.setData(Uri.parse("smsto:" + sdt));
+                startActivity(smsIntent);
+            }
+        });
+
+//        recyclerView.setOnClickListener(new SanPhamAdapter.onItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos, View view) {
+//                SuKien.showDialog(ProfNguoiBanActivity.this);
+//                SanPham sanPham = sanPhamList.get(pos);
+//                MASP = sanPham.getMaSP();
+//                startActivity(new Intent(ProfNguoiBanActivity.this, ChiTietSP_Activity.class));
+//                SuKien.dismissDialog();
+//            }
+//        });
     }
 
     private void getDataUser() {
@@ -90,7 +102,7 @@ public class ProfNguoiBanActivity extends AppCompatActivity {
                     }
                     txt_masv.setText("Mã SV: "+response.body().getMaSV());
                     tv_malop.setText("Mã Lớp: "+response.body().getMaLop());
-                    sdt = response.body().getsDT()+"";
+                    sdt = "0"+response.body().getsDT();
                 }
             }
 
@@ -134,25 +146,28 @@ public class ProfNguoiBanActivity extends AppCompatActivity {
     }
 
     private void showBottomDialog() {
-
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.bottom_chon);
-
-        TextView textView = findViewById(R.id.txt_dialogSDT);
-        textView.setText(sdt);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ProfNguoiBanActivity.this, "Nhấc máy và gọi điện!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        dialog.show();
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-        dialog.getWindow().setGravity(Gravity.BOTTOM);
+//
+//        final Dialog dialog = new Dialog(this);
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        dialog.setContentView(R.layout.bottom_chon);
+//
+//        TextView textView = findViewById(R.id.txt_dialogSDT);
+//        textView.setText(sdt);
+//        textView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(ProfNguoiBanActivity.this, "Nhấc máy và gọi điện!", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        dialog.show();
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+//        dialog.getWindow().setGravity(Gravity.BOTTOM);
+        Intent dialIntent = new Intent(Intent.ACTION_DIAL);
+        dialIntent.setData(Uri.parse("tel:" + sdt));
+        startActivity(dialIntent);
     }
 
     private void anhxa() {
@@ -162,5 +177,6 @@ public class ProfNguoiBanActivity extends AppCompatActivity {
         txt_masv = findViewById(R.id.tv_msvien);
         tv_malop= findViewById(R.id.tv_malop);
         imgbtn_Phone = findViewById(R.id.imgbtn_phone);
+        imgbtn_sendmess = findViewById(R.id.imgbtn_sendmess);
     }
 }

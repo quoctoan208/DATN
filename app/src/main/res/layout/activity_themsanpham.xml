@@ -10,7 +10,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="45dp"
         android:text="Đăng Sản Phẩm"
         android:gravity="center"
         android:background="@color/text"
@@ -42,10 +42,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginStart="5dp"
-                    android:fontFamily="@font/playfair_pt_black"
                     android:text="Thể Loại:"
-                    android:textColor="#686464"
-                    android:textSize="17dp" />
+                    android:textColor="@color/black"
+                    android:textSize="16dp" />
 
                 <Spinner
                     android:id="@+id/planets_spinner"
@@ -63,14 +62,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:layout_marginBottom="10dp"
                 android:text="Ảnh sản phẩm:"
-                android:textColor="#686464"
-                android:textSize="17dp" />
+                android:textColor="@color/black"
+                android:textSize="16dp" />
 
 
             <LinearLayout
+                android:id="@+id/layout_imgthemanh"
+                android:visibility="visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -110,13 +110,14 @@
 
             </LinearLayout>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btn_themanhsp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/Button"
+                android:layout_height="25dp"
+                android:background="@drawable/edit_txt"
+                android:backgroundTint="@color/backgroud"
                 android:layout_marginTop="3dp"
-                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
+                android:fontFamily="@font/baloo2_semibold"
                 android:layout_gravity="center"
                 android:text="Thêm Ảnh"/>
 
@@ -125,17 +126,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:text="Mã Sản Phẩm:"
                 />
             <EditText
                 android:id="@+id/edt_add_masp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:background="@drawable/bogoc_itemview"
                 android:textColor="@color/text"
                 android:textColorHint="@color/Edt_text"
                 android:layout_marginTop="5dp"
+                android:paddingStart="10dp"
                 android:textSize="20dp"/>
 
             <TextView
@@ -143,14 +144,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:text="Tên Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_tensp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:background="@drawable/bogoc_itemview"
                 android:textColor="@color/text"
+                android:paddingStart="10dp"
                 android:textColorHint="@color/Edt_text"
                 android:layout_marginTop="5dp"
                 android:textSize="20dp"/>
@@ -160,12 +161,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:text="Số Lượng Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_soluongsp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:paddingStart="10dp"
                 android:background="@drawable/bogoc_itemview"
                 android:textColor="@color/text"
                 android:textColorHint="@color/Edt_text"
@@ -177,12 +178,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:text="Giá Bán Sản Phẩm:"/>
             <EditText
                 android:id="@+id/edt_add_giabansp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
+                android:paddingStart="10dp"
                 android:background="@drawable/bogoc_itemview"
                 android:textColor="@color/text"
                 android:textColorHint="@color/Edt_text"
@@ -194,27 +195,29 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="5dp"
-                android:fontFamily="@font/playfair_pt_black"
                 android:text="Mô tả chi tiết sản phẩm ( Ít hơn 200 ký tự ):"/>
             <EditText
                 android:id="@+id/edt_add_motasp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="5dp"
                 android:background="@drawable/bogoc_itemview"
                 android:textColor="@color/text"
                 android:textColorHint="@color/Edt_text"
                 android:layout_marginTop="5dp"
                 android:textSize="20dp"/>
 
-            <Button
+            <android.widget.Button
                 android:id="@+id/btn_addsanpham"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:layout_gravity="center"
-                android:backgroundTint="@color/Button"
-                android:drawableRight="@drawable/ic_cart"
-                android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
+                android:background="@drawable/edit_txt"
+                android:backgroundTint="@color/RED"
+                android:drawableRight="@drawable/notepad"
+                android:fontFamily="@font/lato_bolditalic"
                 android:text="Đăng Sản Phẩm"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp" />

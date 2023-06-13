@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +53,7 @@ public class GioHangFragment extends Fragment {
     static GioHangAdapter gio_hangs ;
     static List<GioHang> gioHangList = new ArrayList<>();
     public static List<SanPham> sanPhamThanhToanList;
-
+    boolean check = true;
     static Animation animation;
     private static Activity gioHangFragment;
 
@@ -107,7 +108,27 @@ public class GioHangFragment extends Fragment {
         btn_mua_hang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), DatHangActivity.class));
+                if (sanPhamThanhToanList.size() == 0){
+                    Toast.makeText(getContext(), "Chưa sản phẩm nào được chọn", Toast.LENGTH_SHORT).show();
+                }
+                else if (sanPhamThanhToanList.size() == 1){
+                    startActivity(new Intent(getContext(), DatHangActivity.class));
+                }
+                else {
+                    check = true;
+                    for (int i = 1; i < sanPhamThanhToanList.size(); i++) {
+                        if (sanPhamThanhToanList.get(i).getMaSV() != sanPhamThanhToanList.get(i - 1).getMaSV()) {
+                            check = false; // Nếu phát hiện phần tử khác giá trị đầu tiên, đặt biến check thành false
+                            break; // Kết thúc vòng lặp để kiểm tra tiếp
+                        }
+                    }
+                    if (check) {
+                        startActivity(new Intent(getContext(), DatHangActivity.class));
+                    } else {
+                        Toast.makeText(getContext(), "Hãy chọn các sản phẩm đặt hàng cùng 1 người bán!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
             }
         });
     }

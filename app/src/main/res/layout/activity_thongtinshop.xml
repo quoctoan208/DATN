@@ -21,11 +21,23 @@
             android:id="@+id/imgbtn_phone"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="20dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/phone"
+            app:layout_constraintEnd_toStartOf="@+id/imgbtn_sendmess"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imgbtn_sendmess"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,8 +61,8 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:contentDescription="User"
-                android:scaleType="centerCrop"
-                android:src="@drawable/anhspdemo"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_acc"
                 tools:layout_editor_absoluteX="24dp"
                 tools:layout_editor_absoluteY="84dp" />
         </androidx.cardview.widget.CardView>
@@ -154,7 +166,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Sản phẩm"
+                android:text="Sản phẩm Bán"
                 android:textColor="@color/RED"
                 android:fontFamily="@font/playfair_pt_black"
                 android:textSize="30sp"
@@ -165,6 +177,7 @@
                 android:id="@+id/viewsanphamprof"
                 android:padding="5dp"
                 android:layout_marginEnd="5dp"
+                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 />

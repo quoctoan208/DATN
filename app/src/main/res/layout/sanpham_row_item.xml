@@ -73,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
-                        android:fontFamily="@font/playfair_9pt_semicondensedextrabolditalic"
+                        android:fontFamily="@font/lato_bolditalic"
                         android:maxLines="1"
                         android:text="200.000 Đ"
                         android:textColor="#FF5722"

@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.datn.Adapter.SanPhamAdapter;
 import com.example.datn.Adapter.TheLoaiSPAdapter;
 import com.example.datn.Api.APIService;
@@ -45,6 +47,7 @@ public class HomeFragment extends Fragment {
     Dialog dialog;
     public static List<TheLoai> listTL;
     private ImageSlider imageSlider;
+    private List<SlideModel> imageList;
     List<SanPham> sanPhamList;
 
 
@@ -65,6 +68,12 @@ public class HomeFragment extends Fragment {
     }
 
     private void setImageSlide() {
+        imageList = new ArrayList<>(); // Create image list
+        imageList.add(new SlideModel("https://dean1665.vn/uploads/school/kt-hung-yen.jpg", ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://photo-cms-giaoducthoidai.epicdn.me/w820/Uploaded/2023/usvzfouipohevboheuehnbjmdpn/2023_05_25/hon-2000-vi-tri-viec-lam-cho-sinh-vien-truong-utehy-2-2817.jpg", ScaleTypes.CENTER_INSIDE));
+        imageList.add(new SlideModel("https://dean1665.vn/uploads/school/kt-hung-yen.jpg", ScaleTypes.CENTER_INSIDE));
+
+        imageSlider.setImageList(imageList, ScaleTypes.CENTER_INSIDE);
     }
 
     private void onclick() {
@@ -185,6 +194,6 @@ public class HomeFragment extends Fragment {
         spItemRecycler = view.findViewById(R.id.sanpham_recycler);
         txt_tatca = view.findViewById(R.id.txt_tatca);
         txt_tk = view.findViewById(R.id.txt_tk);
-        imageSlider = view.findViewById(R.id.image_slider);
+        imageSlider = view.findViewById(R.id.image_sliderMain);
     }
 }

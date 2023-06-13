@@ -99,13 +99,11 @@ public class DonHangAdapter extends RecyclerView.Adapter<DonHangAdapter.donhang_
                 break;
             case 3:
                 holder.txt_trangthaidonmua.setText("Đơn hàng đã được giao thành công.");
-                holder.button.setBackgroundColor(Color.RED);
                 holder.button.setText("Mua lại sản phẩm");
                 //mualai(holder, donHang);
                 break;
             case 4:
                 holder.txt_trangthaidonmua.setText("Đơn hàng đã bị hủy.");
-                holder.button.setBackgroundColor(Color.RED);
                 holder.button.setText("Mua lại sản phẩm");
                 //mualai(holder, donHang);
                 break;

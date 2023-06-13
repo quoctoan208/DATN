@@ -92,26 +92,6 @@ public class ChiTietSP_Activity extends AppCompatActivity {
                     SuKien.dismissDialog();
                     Toast.makeText(ChiTietSP_Activity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                     onBackPressed();
-//                    GioHang gioHang1 = new GioHang(response.body().get(0).getIDGIOHANG(), maSV, MASP,
-//                            response.body().get(0).getSoLuong() + 1,
-//                            response.body().get(0).getTongTien() + b);
-//                    APIService.apiService.PutGIOHANG(response.body().get(0).getIDGIOHANG(), gioHang1)
-//                            .enqueue(new Callback<GioHang>() {
-//                                @Override
-//                                public void onResponse(Call<GioHang> call, Response<GioHang> response) {
-//                                    if (response.isSuccessful()) {
-//                                        dialog.dismiss();
-//                                        Toast.makeText(ChiTietSP_Activity.this, "Thêm giỏ hàng thành công", Toast.LENGTH_SHORT).show();
-//                                        onBackPressed();
-//                                    }
-//                                }
-//
-//                                @Override
-//                                public void onFailure(Call<GioHang> call, Throwable t) {
-//                                    dialog.dismiss();
-//                                    Toast.makeText(ChiTietSP_Activity.this, "Check Update GioHang", Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
                 } else {
                     SuKien.dismissDialog();
                     onBackPressed();

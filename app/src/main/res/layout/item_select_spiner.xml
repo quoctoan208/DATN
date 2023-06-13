@@ -9,7 +9,7 @@
     android:padding="10dp"
     android:textColor="@color/Button"
     android:fontFamily="@font/baloo2_semibold"
-    android:textSize="20dp"
+    android:textSize="15dp"
     android:text="select spiner"/>
 
     <ImageView

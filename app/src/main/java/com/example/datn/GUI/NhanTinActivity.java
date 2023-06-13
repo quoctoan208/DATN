@@ -48,69 +48,60 @@ public class NhanTinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nhantin);
 
         // Khởi tạo Firebase Auth và Firebase Database
-        String mAuth = maSV +"";
+        String mAuth = maSV + "";
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        // Nếu đã đăng nhập, lấy ID của người dùng hiện tại và ID của người nhận
+        mSenderId = mAuth;
+        mReceiverId = "Người nhận";
 
-        // Lấy thông tin người dùng hiện tại
-        if (mAuth == null) {
-            // Nếu chưa đăng nhập, chuyển đến màn hình đăng nhập
-            Intent loginIntent = new Intent(NhanTinActivity.this, DangNhap_Activity.class);
-            startActivity(loginIntent);
-            finish();
-        } else {
-            // Nếu đã đăng nhập, lấy ID của người dùng hiện tại và ID của người nhận
-            mSenderId = mAuth;
-            mReceiverId = "Người nhận";
+        // Khởi tạo RecyclerView và MessageAdapter
+        mRecyclerView = findViewById(R.id.message_list);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new MessageAdapter(this, mMessages, mSenderId);
+        mRecyclerView.setAdapter(mAdapter);
 
-            // Khởi tạo RecyclerView và MessageAdapter
-            mRecyclerView = findViewById(R.id.message_list);
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            mAdapter = new MessageAdapter(this, mMessages, mSenderId);
-            mRecyclerView.setAdapter(mAdapter);
-
-            // Lấy danh sách các tin nhắn từ Firebase Database
-            mDatabase.child("messages").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    mMessages.clear();
-                    for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
-                        Message message = messageSnapshot.getValue(Message.class);
-                        if ((message.getSenderId().equals(mSenderId) && message.getReceiverId().equals(mReceiverId))
-                                || (message.getSenderId().equals(mReceiverId) && message.getReceiverId().equals(mSenderId))) {
-                            mMessages.add(message);
-                        }
-                    }
-                    mAdapter.notifyDataSetChanged();
-                    int targetPosition = mAdapter.getItemCount() - 1;
-                    if (targetPosition >= 0) {
-                        mRecyclerView.smoothScrollToPosition(targetPosition);
-                    } else {
-                        // Xử lý lỗi khi danh sách tin nhắn rỗng ở đây
-                        Toast.makeText(NhanTinActivity.this, "Chưa có tin nhắn", Toast.LENGTH_SHORT).show();
+        // Lấy danh sách các tin nhắn từ Firebase Database
+        mDatabase.child("messages").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                mMessages.clear();
+                for (DataSnapshot messageSnapshot : snapshot.getChildren()) {
+                    Message message = messageSnapshot.getValue(Message.class);
+                    if ((message.getSenderId().equals(mSenderId) && message.getReceiverId().equals(mReceiverId))
+                            || (message.getSenderId().equals(mReceiverId) && message.getReceiverId().equals(mSenderId))) {
+                        mMessages.add(message);
                     }
                 }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Log.e(TAG, "onCancelled: " + error.getMessage());
+                mAdapter.notifyDataSetChanged();
+                int targetPosition = mAdapter.getItemCount() - 1;
+                if (targetPosition >= 0) {
+                    mRecyclerView.smoothScrollToPosition(targetPosition);
+                } else {
+                    // Xử lý lỗi khi danh sách tin nhắn rỗng ở đây
+                    Toast.makeText(NhanTinActivity.this, "Chưa có tin nhắn", Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
 
-            // Khởi tạo các view và set onClickListener cho nút gửi tin nhắn
-            mMessageEditText = findViewById(R.id.message_edit_text);
-            mSendButton = findViewById(R.id.send_button);
-            mSendButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String messageText = mMessageEditText.getText().toString().trim();
-                    if (!TextUtils.isEmpty(messageText)) {
-                        long timestamp = System.currentTimeMillis();
-                        Message message = new Message(mSenderId, mReceiverId, messageText, timestamp);
-                        mDatabase.child("messages").push().setValue(message);
-                        mMessageEditText.setText("");
-                    }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e(TAG, "onCancelled: " + error.getMessage());
+            }
+        });
+
+        // Khởi tạo các view và set onClickListener cho nút gửi tin nhắn
+        mMessageEditText = findViewById(R.id.message_edit_text);
+        mSendButton = findViewById(R.id.send_button);
+        mSendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String messageText = mMessageEditText.getText().toString().trim();
+                if (!TextUtils.isEmpty(messageText)) {
+                    long timestamp = System.currentTimeMillis();
+                    Message message = new Message(mSenderId, mReceiverId, messageText, timestamp);
+                    mDatabase.child("messages").push().setValue(message);
+                    mMessageEditText.setText("");
                 }
-            });
-        }
+            }
+        });
     }
 }

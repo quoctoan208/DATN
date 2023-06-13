@@ -39,6 +39,8 @@
 
         <activity android:name=".GUI.TaiKhoanActivity"
         android:exported="false"/>
+        <activity android:name=".GUI.SuaTaiKhoan"
+            android:exported="false"/>
 
         <activity android:name=".GUI.ProfNguoiBanActivity"
             android:exported="false"/>
