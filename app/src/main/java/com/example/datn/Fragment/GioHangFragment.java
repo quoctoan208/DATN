@@ -134,6 +134,7 @@ public class GioHangFragment extends Fragment {
     }
 
     public static void getdata() {
+        SuKien.showDialog(gioHangFragment);
         // Gọi API để lấy danh sách giỏ hàng của sinh viên dựa trên mã số sinh viên
         APIService.apiService.Getgiohang(maSV).enqueue(new Callback<List<GioHang>>() {
             @Override
@@ -144,6 +145,7 @@ public class GioHangFragment extends Fragment {
                     txt_error.setVisibility(View.GONE);
                     layout.setVisibility(View.VISIBLE);
                     gio_hangs.notifyDataSetChanged();
+                    SuKien.dismissDialog();
                 } else {
                     SuKien.dismissDialog();
                     txt_error.setVisibility(View.VISIBLE);

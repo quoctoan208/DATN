@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.Model.TaiKhoan;
 import com.example.datn.R;
 
@@ -51,14 +52,18 @@ public class SuaTaiKhoan extends AppCompatActivity {
     }
 
     private void CapNhatThongTin(){
+        SuKien.showDialog(SuaTaiKhoan.this);
         if(layout_DoiMK.getVisibility() == View.VISIBLE){
 
             if ((edtMKCu.getText().toString().equals(taikhoancuatoi.getMatKhau())) == false){
+                SuKien.dismissDialog();
                 Toast.makeText(this, "Mật khẩu cũ chưa chính xác", Toast.LENGTH_SHORT).show();
             }
             else if (edtMKCu.getText().toString().isEmpty()||edtMKMoi.getText().toString().isEmpty()||edtXacNhanMKMoi.getText().toString().isEmpty()){
+                SuKien.dismissDialog();
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             } else if (edtMKMoi.getText().toString().equals(edtXacNhanMKMoi.getText().toString()) == false) {
+                SuKien.dismissDialog();
                 Toast.makeText(this, "Vui lòng xác nhận lại mật khẩu mới", Toast.LENGTH_SHORT).show();
             }else {
                 TaiKhoan taiKhoan = new TaiKhoan(Integer.parseInt(edtSDT.getText().toString()),edtMKMoi.getText().toString(),
@@ -68,10 +73,11 @@ public class SuaTaiKhoan extends AppCompatActivity {
                 APIService.apiService.putTAIKHOAN(taikhoancuatoi.getMaSV(),taiKhoan).enqueue(new Callback<TaiKhoan>() {
                     @Override
                     public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
-                        Toast.makeText(SuaTaiKhoan.this, "Cập nhật tải khoản thành công", Toast.LENGTH_SHORT).show();
                         APIService.apiService.GetTaikhoan(taikhoancuatoi.getMaSV()).enqueue(new Callback<TaiKhoan>() {
                             @Override
                             public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
+                                Toast.makeText(SuaTaiKhoan.this, "Cập nhật tải khoản thành công", Toast.LENGTH_SHORT).show();
+                                SuKien.dismissDialog();
                                 taikhoancuatoi = response.body();
                                 getDataUser();
                                 onBackPressed();
@@ -80,7 +86,7 @@ public class SuaTaiKhoan extends AppCompatActivity {
 
                             @Override
                             public void onFailure(Call<TaiKhoan> call, Throwable t) {
-
+                                SuKien.dismissDialog();
                             }
                         });
 
@@ -88,7 +94,7 @@ public class SuaTaiKhoan extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<TaiKhoan> call, Throwable t) {
-
+                        SuKien.dismissDialog();
                     }
                 });
             }
@@ -102,15 +108,27 @@ public class SuaTaiKhoan extends AppCompatActivity {
             APIService.apiService.putTAIKHOAN(taikhoancuatoi.getMaSV(),taiKhoan).enqueue(new Callback<TaiKhoan>() {
                 @Override
                 public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
-                    Toast.makeText(SuaTaiKhoan.this, "Cập nhật tải khoản thành công", Toast.LENGTH_SHORT).show();
-                    getDataUser();
-                    onBackPressed();
-                    finish();
+                    APIService.apiService.GetTaikhoan(taikhoancuatoi.getMaSV()).enqueue(new Callback<TaiKhoan>() {
+                        @Override
+                        public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
+                            Toast.makeText(SuaTaiKhoan.this, "Cập nhật tải khoản thành công", Toast.LENGTH_SHORT).show();
+                            SuKien.dismissDialog();
+                            taikhoancuatoi = response.body();
+                            getDataUser();
+                            onBackPressed();
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(Call<TaiKhoan> call, Throwable t) {
+                            SuKien.dismissDialog();
+                        }
+                    });
                 }
 
                 @Override
                 public void onFailure(Call<TaiKhoan> call, Throwable t) {
-
+                    SuKien.dismissDialog();
                 }
             });
         }

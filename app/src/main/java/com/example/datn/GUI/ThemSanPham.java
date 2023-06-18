@@ -219,29 +219,39 @@ public class ThemSanPham extends Activity {
         SuKien.showDialog(ThemSanPham.this);
         mMasp = edt_masp.getText().toString();
         String mTenSP = edt_tensp.getText().toString();
-        int mSoLuong = Integer.parseInt(edt_soluong.getText().toString());
-        float mDonGia = Float.parseFloat(edt_dongia.getText().toString());
+        String mSoLuong1 = edt_soluong.getText().toString();
+        String mDonGia1 = edt_dongia.getText().toString();
         String mMota = edt_motasp.getText().toString();
         int mMaSV = maSV;
         int mXetDuyet = 1;// chưa xác nhận
 
-        sanPham = new SanPham(mMasp, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
-        anhSP = new AnhSP(mMasp, mAnh1, mAnh2, mAnh3, mAnh4, mAnh5);
-        //thêm dữ liệu vào dbSanpham
-        APIService.apiService.PostSANPHAM(sanPham).enqueue(new Callback<Integer>() {
-            @Override
-            public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (response.isSuccessful()) {
-                    addAnhSPAPI (anhSP); //Thêm ảnh sp lên API
+        if(mMasp.isEmpty() || mTenSP.isEmpty() || mSoLuong1.isEmpty() || mDonGia1.isEmpty() ){
+            SuKien.dismissDialog();
+            Toast.makeText(this, "Không được để trống dữ liệu", Toast.LENGTH_SHORT).show();
+        } else if ( !mSoLuong1.matches("\\d+") || !mDonGia1.matches("\\d+")) {
+            SuKien.dismissDialog();;
+            Toast.makeText(this, "Số lượng và Đơn giá không được có chữ cái!", Toast.LENGTH_SHORT).show();
+        } else {
+            int mSoLuong = Integer.parseInt(mSoLuong1);
+            float mDonGia = Float.parseFloat(mDonGia1);
+            sanPham = new SanPham(mMasp, maTL, mTenSP, mAnh1, mDonGia, mSoLuong, mMota, mXetDuyet, mMaSV);
+            anhSP = new AnhSP(mMasp, mAnh1, mAnh2, mAnh3, mAnh4, mAnh5);
+            //thêm dữ liệu vào dbSanpham
+            APIService.apiService.PostSANPHAM(sanPham).enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    if (response.isSuccessful()) {
+                        addAnhSPAPI (anhSP); //Thêm ảnh sp lên API
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Integer> call, Throwable t) {
-                SuKien.dismissDialog();
-                Toast.makeText(ThemSanPham.this, "Không thêm được sản phẩm", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+                    SuKien.dismissDialog();
+                    Toast.makeText(ThemSanPham.this, "Không thêm được sản phẩm", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private void addAnhSPAPI(AnhSP anhSP1) {

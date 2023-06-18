@@ -36,7 +36,7 @@ import retrofit2.http.Query;
 public interface APIService {
 
     Gson gson = new GsonBuilder().setLenient().setDateFormat("dd/MM/yyyy").create();
-    APIService apiService = new Retrofit.Builder().baseUrl("https://littlepurpletree48.conveyor.cloud/")
+    APIService apiService = new Retrofit.Builder().baseUrl("https://widegreenshed28.conveyor.cloud/te")
             .client(getUnsafeOkHttpClient().build())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

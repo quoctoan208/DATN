@@ -22,12 +22,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:fontFamily="@font/playfair_pt_black"
+            android:fontFamily="@font/font_item_text"
             android:layout_marginTop="5dp"
             android:padding="8dp"
             android:text="Chức Năng"
             android:textAlignment="viewStart"
-            android:textColor="#2196F3"
+            android:textColor="@color/RED"
             android:textSize="30dp"
             android:textStyle="bold" />
 
@@ -66,7 +66,7 @@
             android:layout_marginLeft="30dp"
             android:text="Thêm sản phẩm mới"
             android:layout_gravity="center"
-            android:fontFamily="@font/playfair_pt_black"
+            android:fontFamily="@font/baloo2_semibold"
             android:textColor="@color/text"
             android:textStyle="bold"
             android:textSize="22sp" />

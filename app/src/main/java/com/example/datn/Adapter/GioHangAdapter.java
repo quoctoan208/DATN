@@ -144,9 +144,6 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.gio_hang
                             (giohang.getSoLuong() + 1) * GiaTien);
                     Putgiohang(giohang.getIDGIOHANG(), gioHang1);
                 }
-//
-//                } else
-//                    Toast.makeText(context, "Chỉ có " + sosp[0] + " sản phẩm được đăng bán", Toast.LENGTH_SHORT).show();
             }
         });
 

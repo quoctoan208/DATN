@@ -83,9 +83,28 @@ public class SuaSanPham extends AppCompatActivity {
                 UpDatesanphamAPI();
             }
         });
+        btn_xoaSP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                APIService.apiService.DeleteSPbyID(maSPEdit).enqueue(new Callback<SanPham>() {
+                    @Override
+                    public void onResponse(Call<SanPham> call, Response<SanPham> response) {
+                        onBackPressed();
+                        finish();
+                        Toast.makeText(SuaSanPham.this, "Đã xóa sản phẩm.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<SanPham> call, Throwable t) {
+                        Toast.makeText(SuaSanPham.this, "Xóa sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
     }
 
     private void getData() {
+        SuKien.showDialog(SuaSanPham.this);
         APIService.apiService.GetSANPHAM(maSPEdit).enqueue(new Callback<SanPham>() {
             @Override
             public void onResponse(Call<SanPham> call, Response<SanPham> response) {
@@ -95,6 +114,7 @@ public class SuaSanPham extends AppCompatActivity {
                     edt_suadongia.setText(response.body().getDonGia() + "");
                     edt_suamotasp.setText(response.body().getMatoSP());
                     mAnh1 = response.body().getAnhSP();
+                    SuKien.dismissDialog();
                 }
             }
 

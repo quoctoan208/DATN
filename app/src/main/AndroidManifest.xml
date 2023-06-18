@@ -7,10 +7,10 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/anhspdemo"
         android:label="@string/app_name"
         tools:replace="android:theme"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/anhspdemo"
         android:supportsRtl="true"
         android:theme="@style/Theme.DATN"
         tools:targetApi="31" >
@@ -46,9 +46,6 @@
             android:exported="false"/>
 
         <activity android:name=".GUI.NhanTinActivity"
-            android:exported="false"/>
-
-        <activity android:name=".Momo.ThanhToanMomoActivity"
             android:exported="false"/>
 
         <activity android:name=".GUI.SuaSanPham"

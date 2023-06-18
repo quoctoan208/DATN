@@ -34,13 +34,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ChiTietSP_Activity extends AppCompatActivity {
-    private ImageView img_nhantin, imageView;
+    private ImageView imageyeuthic, imageView;
     private Button btn_chitiet_themgiohang;
     private TextView chitiet_malop, chitiet_soluong, chitiet_tensp, chitiet_mota, chitiet_dongia;
     private float tongtien;
     private List<SlideModel> imageList;
     private ImageSlider imageSlider;
     public static String maSV_SP;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +66,21 @@ public class ChiTietSP_Activity extends AppCompatActivity {
                 addGioHang();
             }
         });
-        img_nhantin.setOnClickListener(new View.OnClickListener() {
+        imageyeuthic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ChiTietSP_Activity.this, NhanTinActivity.class));
+                int newImageId = getResources().getIdentifier("love_icon", "drawable", getPackageName());
+                if (imageyeuthic.getId() != newImageId) {
+                    // Đổi hình ảnh của ImageView
+                    imageyeuthic.setImageResource(R.drawable.love_icon);
+                    Toast.makeText(ChiTietSP_Activity.this, "Đã thêm vào yêu thích", Toast.LENGTH_SHORT).show();
+
+                }
+                else if(imageyeuthic.getId() == newImageId){
+                    // Đổi hình ảnh của ImageView
+                    imageyeuthic.setImageResource(R.drawable.unlove_icon);
+                    Toast.makeText(ChiTietSP_Activity.this, "Đã bỏ yêu thích sản phẩm", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -164,6 +177,6 @@ public class ChiTietSP_Activity extends AppCompatActivity {
         imageSlider = findViewById(R.id.image_slider);
         chitiet_malop = findViewById(R.id.chitiet_masinhvien);
         chitiet_soluong = findViewById(R.id.chitiet_soluong);
-        img_nhantin = findViewById(R.id.imagenhantin);
+        imageyeuthic = findViewById(R.id.imageyeuthic);
     }
 }

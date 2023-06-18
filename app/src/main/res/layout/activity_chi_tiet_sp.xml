@@ -39,16 +39,7 @@
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
-            <ImageView
-                android:id="@+id/imagenhantin"
-                android:layout_width="45dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/edit_txt"
-                android:backgroundTint="@color/text"
-                android:src="@drawable/baseline_message_24" />
+
         </LinearLayout>
 
 
@@ -89,18 +80,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/chitiet_tensp"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="15dp"
-                    android:fontFamily="@font/playfair_pt_black"
-                    android:padding="5dp"
-                    android:text="Máy bơm thời sinh viên"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="25sp"
-                    tools:layout_editor_absoluteX="0dp" />
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/chitiet_tensp"
+                        android:layout_width="340dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/playfair_pt_black"
+                        android:text="Máy bơm thời sinh viên"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25sp"
+                        tools:layout_editor_absoluteX="0dp" />
+
+                    <ImageView
+                        android:id="@+id/imageyeuthic"
+                        android:layout_width="45dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/unlove_icon" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -128,7 +133,7 @@
                         android:fontFamily="@font/baloo2_semibold"
                         android:gravity="center"
                         android:text="Số lượng: 1"
-                        android:textColor="@color/RED"
+                        android:textColor="@color/black"
                         android:textSize="19dp" />
                 </LinearLayout>
 
@@ -166,7 +171,7 @@ Sợi vải coolmax. Làm mát và thoáng khí x2 lần
                 android:fontFamily="@font/baloo2_semibold"
                 android:gravity="center"
                 android:text="150.000 VNĐ"
-                android:textColor="@color/Button"
+                android:textColor="@color/RED"
                 android:textSize="27sp" />
 
             <android.widget.Button
@@ -175,7 +180,7 @@ Sợi vải coolmax. Làm mát và thoáng khí x2 lần
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/detail_page_cart_button_bg"
-                android:drawableStart="@drawable/runner_icon"
+                android:drawableStart="@drawable/ic_cart"
                 android:paddingStart="20dp"
                 android:text="Thêm giỏ hàng"
                 android:textAllCaps="false"

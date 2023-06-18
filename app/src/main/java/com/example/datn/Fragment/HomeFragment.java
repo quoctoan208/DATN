@@ -32,6 +32,8 @@ import com.example.datn.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,6 +67,28 @@ public class HomeFragment extends Fragment {
         setUpView();
         loadData();
         onclick();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                //Lấy dữ liệu thể loại sản phẩm
+                APIService.apiService.getTheLoai().enqueue(new Callback<List<TheLoai>>() {
+                    @Override
+                    public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
+                        if (response.body() != null) {
+                            listTL.addAll(response.body());
+                            theLoaiSPAdapter.setData(listTL);
+                            Toast.makeText(getContext(), "Đã cập nhật thông tin tài khoản", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<TheLoai>> call, Throwable t) {
+                        Log.e("THELOAI", "Error: " + t.getMessage());
+                    }
+                });
+            }
+        });
     }
 
     private void setImageSlide() {
@@ -137,41 +161,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadData() {
-
+        SuKien.showDialog(getContext());
         //Lấy dữ liệu sản phẩm
         APIService.apiService.getSanPhamxetduyet(maSV, 2).enqueue(new Callback<List<SanPham>>() {
             @Override
             public void onResponse(Call<List<SanPham>> call, Response<List<SanPham>> response) {
                 if (response.body() != null) {
                     sanPhamList.addAll(response.body());
+                    SuKien.dismissDialog();
                     sanPhamAdapter.setData(sanPhamList);
+
                 } else {
+                    SuKien.dismissDialog();
                     Log.e("loadData", "Response error: " + response.code() + " - " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<List<SanPham>> call, Throwable t) {
+                SuKien.dismissDialog();
                 Log.e("loadSANPHAM", "Error: " + t.getMessage());
             }
         });
 
-        //Lấy dữ liệu thể loại sản phẩm
-        APIService.apiService.getTheLoai().enqueue(new Callback<List<TheLoai>>() {
-            @Override
-            public void onResponse(Call<List<TheLoai>> call, Response<List<TheLoai>> response) {
-                if (response.body() != null) {
-                    listTL.addAll(response.body());
-                    theLoaiSPAdapter.setData(listTL);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<TheLoai>> call, Throwable t) {
-                Log.e("THELOAI", "Error: " + t.getMessage());
-            }
-        });
-        SuKien.dismissDialog();
     }
 
     private void setUpView() {
@@ -189,7 +201,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void anhxa(View view) {
-        SuKien.showDialog(getContext());
         tlSanPhamRecycler = view.findViewById(R.id.tl_recycler);
         spItemRecycler = view.findViewById(R.id.sanpham_recycler);
         txt_tatca = view.findViewById(R.id.txt_tatca);

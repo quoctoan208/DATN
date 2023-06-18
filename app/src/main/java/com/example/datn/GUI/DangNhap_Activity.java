@@ -51,18 +51,22 @@ public class DangNhap_Activity extends AppCompatActivity {
     }
 
     private void Dangnhap() {
-        int masv = Integer.parseInt(txt_masvdangnhap.getText().toString());
+        String masv = txt_masvdangnhap.getText().toString();
         String password = txt_password.getText().toString();
-        if (password == "") {
+        if (password.isEmpty() || masv.isEmpty() ) {
             SuKien.dismissDialog();
             Toast.makeText(this, "Vui lòng điền đủ thông tin", Toast.LENGTH_SHORT).show();
+        } else if (!masv.matches("\\d+")) {
+            SuKien.dismissDialog();
+            Toast.makeText(this, "Mã sinh viên sai cú pháp", Toast.LENGTH_SHORT).show();
         } else {
-            APIService.apiService.Kiemtra(masv, password).enqueue(new Callback<String>() {
+            int masv1 = Integer.parseInt(txt_masvdangnhap.getText().toString());
+            APIService.apiService.Kiemtra(masv1, password).enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
                     if (response.isSuccessful()) {
-                        maSV = masv;
-                        APIService.apiService.GetTaikhoan(masv).enqueue(new Callback<TaiKhoan>() {
+                        maSV = masv1;
+                        APIService.apiService.GetTaikhoan(masv1).enqueue(new Callback<TaiKhoan>() {
                             @Override
                             public void onResponse(Call<TaiKhoan> call, Response<TaiKhoan> response) {
                                 if (response.isSuccessful()) {

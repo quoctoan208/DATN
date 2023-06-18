@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.datn.Adapter.SanPhamAdapter;
 import com.example.datn.Api.APIService;
+import com.example.datn.BUS.SuKien;
 import com.example.datn.GUI.ChiTietSP_Activity;
 import com.example.datn.GUI.SuaSanPham;
 import com.example.datn.Model.SanPham;
@@ -66,6 +67,7 @@ public class SanPhamDaDangFragment extends Fragment {
     }
 
     private void getData() {
+        SuKien.showDialog(getContext());
         //Lấy dữ liệu sản phẩm của tôi = msv
         APIService.apiService.getSanPhamcuatoi(maSV).enqueue(new Callback<List<SanPham>>() {
             @Override
@@ -82,16 +84,19 @@ public class SanPhamDaDangFragment extends Fragment {
                     }
                     sanPhamAdapter1.setData(sanPhamList1);
                     sanPhamAdapter2.setData(sanPhamList2);
+                    SuKien.dismissDialog();
                 }
                 else {
                     Toast.makeText(getContext(), "Bạn chưa đăng sản phẩm nào!", Toast.LENGTH_SHORT).show();
                     linearLayout1.setVisibility(View.VISIBLE);
                     LinearLayout2.setVisibility(View.VISIBLE);
+                    SuKien.dismissDialog();
                 }
             }
 
             @Override
             public void onFailure(Call<List<SanPham>> call, Throwable t) {
+                SuKien.dismissDialog();
                 Toast.makeText(getContext(), "Lỗi không thể get API", Toast.LENGTH_SHORT).show();
             }
         });
